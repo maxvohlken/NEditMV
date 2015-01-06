@@ -1,0 +1,21 @@
+extern const char *version_string;
+
+#define NEDITMV_VERSION_TEXT \
+"\
+@PACKAGE@ @VERSION@-@MV_PATCH@\n\
+@MV_PATCH_DATE@\n\
+@target@\n\
+Configured on @CONFIGURE_DATE@.\n\
+Based on the @VERSION@ version of NEdit.\n\
+\n\
+Max Vohlken\n\
+max.vohlken@rational.com\n\
+\n\
+ftp://ftp.fnal.gov/pub/nedit/v5_0_1/contrib/max/5.0.1\n\
+\n\
+IBM nor the company formerly known as Rational Software make no\n\
+warranty, expressed or implied, or assumes any legal liability or\n\
+responsibility for the accuracy, completeness, or usefulness of this\n\
+code.\n\
+\n\
+"

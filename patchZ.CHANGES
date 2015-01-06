@@ -1,0 +1,27 @@
+                                                              X/Y/97
+
+This is the change summary for the NEdit 5.0 MV patch Z.
+
+It can be downloaded from:
+
+  ftp://ftp.rational.com/exchange/outgoing/maxv/nedit/5.0
+  ftp://ftp.fnal.gov/pub/nedit/v5_0/contrib/max/5.0
+
+Features:
+
+Fixes:
+   
+--------- patchZ.source: Changes in the source directory ---------
+ 
+--------- patchZ.util: Changes in the util directory ---------
+   
+----------------------------------------------------------------------
+ Max Vohlken
+ Rational Software
+ max.vohlken@rational.com
+----------------------------------------------------------------------
+
+Rational Software nor the company formerly known as Pure Atria make no
+warranty, expressed or implied, or assumes any legal liability or
+responsibility for the accuracy, completeness, or usefulness of this
+code.

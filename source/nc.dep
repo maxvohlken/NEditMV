@@ -1,0 +1,80 @@
+# Microsoft Developer Studio Generated Dependency File, included by nc.mak
+
+.\clearcase.c : \
+	"..\config.h"\
+	".\clearcase.h"\
+	
+
+.\nc.c : \
+	"$(XDK)\include\x11\composite.h"\
+	"$(XDK)\include\x11\compositep.h"\
+	"$(XDK)\include\x11\constrainp.h"\
+	"$(XDK)\include\x11\constraint.h"\
+	"$(XDK)\include\x11\core.h"\
+	"$(XDK)\include\x11\corep.h"\
+	"$(XDK)\include\x11\intrinsic.h"\
+	"$(XDK)\include\x11\intrinsicp.h"\
+	"$(XDK)\include\x11\object.h"\
+	"$(XDK)\include\x11\objectp.h"\
+	"$(XDK)\include\x11\rectobj.h"\
+	"$(XDK)\include\x11\rectobjp.h"\
+	"$(XDK)\include\x11\x.h"\
+	"$(XDK)\include\x11\xatom.h"\
+	"$(XDK)\include\x11\xfuncproto.h"\
+	"$(XDK)\include\x11\xlib.h"\
+	"$(XDK)\include\x11\xlibxtra.h"\
+	"$(XDK)\include\x11\xosdefs.h"\
+	"$(XDK)\include\x11\xresource.h"\
+	"$(XDK)\include\x11\xutil.h"\
+	"$(XDK)\include\x11\xw32defs.h"\
+	"..\config.h"\
+	"..\util\fileutils.h"\
+	"..\util\preffile.h"\
+	".\server_common.h"\
+	
+
+.\server_common.c : \
+	"$(XDK)\include\x11\composite.h"\
+	"$(XDK)\include\x11\constraint.h"\
+	"$(XDK)\include\x11\core.h"\
+	"$(XDK)\include\x11\ice\ice.h"\
+	"$(XDK)\include\x11\ice\icelib.h"\
+	"$(XDK)\include\x11\intrinsic.h"\
+	"$(XDK)\include\x11\object.h"\
+	"$(XDK)\include\x11\rectobj.h"\
+	"$(XDK)\include\x11\shell.h"\
+	"$(XDK)\include\x11\sm\sm.h"\
+	"$(XDK)\include\x11\sm\smlib.h"\
+	"$(XDK)\include\x11\stringdefs.h"\
+	"$(XDK)\include\x11\x.h"\
+	"$(XDK)\include\x11\xatom.h"\
+	"$(XDK)\include\x11\xfuncproto.h"\
+	"$(XDK)\include\x11\xlib.h"\
+	"$(XDK)\include\x11\xosdefs.h"\
+	"$(XDK)\include\x11\xresource.h"\
+	"$(XDK)\include\x11\xutil.h"\
+	"$(XDK)\include\x11\xw32defs.h"\
+	"$(XDK)\include\xm\display.h"\
+	"$(XDK)\include\xm\dragc.h"\
+	"$(XDK)\include\xm\dragdrop.h"\
+	"$(XDK)\include\xm\dragicon.h"\
+	"$(XDK)\include\xm\dragovers.h"\
+	"$(XDK)\include\xm\dropsmgr.h"\
+	"$(XDK)\include\xm\droptrans.h"\
+	"$(XDK)\include\xm\gadget.h"\
+	"$(XDK)\include\xm\manager.h"\
+	"$(XDK)\include\xm\primitive.h"\
+	"$(XDK)\include\xm\transfer.h"\
+	"$(XDK)\include\xm\txtpropcv.h"\
+	"$(XDK)\include\xm\vendors.h"\
+	"$(XDK)\include\xm\virtkeys.h"\
+	"$(XDK)\include\xm\xm.h"\
+	"$(XDK)\include\xm\xmim.h"\
+	"$(XDK)\include\xm\xmstrdefs.h"\
+	"..\config.h"\
+	"..\util\fileutils.h"\
+	".\clearcase.h"\
+	".\nedit.h"\
+	".\server_common.h"\
+	".\textbuf.h"\
+	

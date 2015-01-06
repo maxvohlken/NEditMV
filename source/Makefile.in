@@ -1,0 +1,346 @@
+# Makefile.in generated automatically by automake 0.28 from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy, distribute and modify it.
+
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+AR = @AR@
+RANLIB = @RANLIB@
+PURIFY = @PURIFY@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+AUTOMAKE_OPTIONS = 
+
+bin_PROGRAMS = nedit nc
+
+DIST_OTHER = 
+DISTCLEANFILES = 
+
+INCLUDES = -I.. -I$(top_srcdir)/util -I$(srcdir)
+CONFIG_HEADER = ../config.h
+
+LDADD = ../util/libNUtil.a
+PROGRAMS = $(bin_PROGRAMS)
+
+CC = @CC@
+LEX = @LEX@
+YACC = @YACC@
+
+DEFS = @DEFS@
+CPPFLAGS = @CPPFLAGS@
+CFLAGS = @CFLAGS@
+BIGGER_STRINGS = @BIGGER_STRINGS@
+LDFLAGS = @LDFLAGS@
+MOTIF_CFLAGS = @MOTIF_CFLAGS@
+MOTIF_LDFLAGS = @MOTIF_LDFLAGS@
+MOTIF_PRE_LIBS = @MOTIF_PRE_LIBS@
+MOTIF_LIBS = @MOTIF_LIBS@
+MOTIF_EXTRA_LIBS = @MOTIF_EXTRA_LIBS@
+LIBS = @LIBS@
+
+ALL_X_LIBS = $(MOTIF_PRE_LIBS) $(MOTIF_LIBS) $(MOTIF_EXTRA_LIBS)
+COMPILE = $(CC) -c $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(MOTIF_CFLAGS)
+LINK = $(PURIFY) $(CC) $(LDFLAGS) $(MOTIF_LDFLAGS) -o $@
+
+o = .@U@o
+nedit_SOURCES = $(SOURCES)
+nedit_OBJECTS = $(OBJECTS)
+nedit_LDADD = $(LDADD)
+nc_SOURCES = nc.c server_common.c clearcase.c
+nc_OBJECTS = nc$o server_common$o clearcase$o
+nc_LDADD = $(LDADD)
+
+DIST_COMMON = 
+
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFOS) $(MANS) $(DIST_OTHER) $(DATA)
+
+DEP_DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFO_DEPS) $(MANS) $(DIST_OTHER) $(DATA)
+
+HEADERS = \
+ clearcase.h file.h help.h highlight.h macro.h menu.h nedit.h \
+ preferences.h regularExp.h search.h selection.h server.h \
+ server_common.h shell.h shift.h tags.h text.h textBuf.h textDisp.h \
+ textDrag.h textP.h textSel.h undo.h userCmds.h window.h
+
+SOURCES = \
+ clearcase.c file.c help.c highlight.c highlightData.c \
+ interpret.c macro.c menu.c nedit.c parse.c \
+ preferences.c regularExp.c search.c selection.c \
+ server.c server_common.c shell.c shift.c \
+ smartIndent.c strerror.c tags.c text.c textBuf.c \
+ textDisp.c textDrag.c textSel.c \
+ undo.c userCmds.c window.c
+
+OBJECTS = \
+ clearcase$o file$o help$o highlight$o highlightData$o \
+ interpret$o macro$o menu$o nedit$o parse$o \
+ preferences$o regularExp$o search$o selection$o \
+ server$o server_common$o shell$o shift$o \
+ smartIndent$o strerror$o tags$o text$o textBuf$o \
+ textDisp$o textDrag$o textSel$o \
+ undo$o userCmds$o window$o
+
+default: all
+
+#$(srcdir)/Makefile.in: Makefile.am
+#	cd $(top_srcdir) && automake $(subdir)/Makefile
+
+Makefile: ../config.status Makefile.in
+	cd .. && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+
+help.c: ../config.status help.c.in
+	cd .. && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+
+mostlyclean-binPROGRAMS:
+
+clean-binPROGRAMS:
+	rm -f $(bin_PROGRAMS)
+
+distclean-binPROGRAMS:
+
+maintainer-clean-binPROGRAMS:
+
+install-binPROGRAMS: all
+	$(top_srcdir)/mkinstalldirs $(bindir)
+	for p in $(bin_PROGRAMS); do		\
+	  if test -f $$p; then			\
+	    $(INSTALL_PROGRAM) $$p $(bindir)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi				\
+	done
+
+uninstall-binPROGRAMS:
+	for p in $(bin_PROGRAMS); do \
+	  rm -f $(bindir)/`echo $$p|sed '$(transform)'`; \
+	done
+
+.c.o:
+	$(COMPILE) $<
+
+.y.o:
+	$(YACC.y) $<
+	$(COMPILE) -o $@ y.tab.c
+	$(RM) y.tab.c
+
+mostlyclean-compile:
+	rm -f *.o core
+
+clean-compile:
+
+distclean-compile:
+	rm -f *.tab.c
+
+maintainer-clean-compile:
+
+nedit: $(nedit_OBJECTS)
+	$(LINK) $(nedit_OBJECTS) $(nedit_LDADD) $(ALL_X_LIBS) $(LIBS)
+$(nedit_OBJECTS): ../config.h
+
+nc: $(nc_OBJECTS)
+	$(LINK) $(nc_OBJECTS) $(nc_LDADD) $(ALL_X_LIBS) $(LIBS)
+$(nc_OBJECTS): ../config.h
+
+textBufTest: textBufTest.o textBuf.o
+	$(LINK) textBufTest.o textBuf.o -lXt -o $@
+	
+help.o: help.c
+	$(COMPILE) $(BIGGER_STRINGS) help.c
+
+text.o: text.c
+	$(COMPILE) $(BIGGER_STRINGS) text.c
+
+smartIndent.o: smartIndent.c
+	$(COMPILE) $(BIGGER_STRINGS) smartIndent.c
+
+ID:	$(HEADERS) $(SOURCES)
+	here=`pwd` && cd $(srcdir) && mkid -f $$here/ID $(SOURCES) $(HEADERS)
+
+tags: TAGS
+
+TAGS:
+	here=`pwd` && cd $(srcdir) && etags $(ETAGS_ARGS) $(SOURCES) $(HEADERS) -o $$here/TAGS
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	rm -f TAGS ID
+
+maintainer-clean-tags:
+
+subdir = source
+distdir = ../$(PACKAGE)-$(VERSION)/$(subdir)
+dist: $(DEP_DISTFILES)
+	@for file in $(DISTFILES); do		\
+	  test -f $(distdir)/$$file \
+	  || ln $(srcdir)/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $(srcdir)/$$file $(distdir)/$$file; \
+	done
+
+all: Makefile help.c $(PROGRAMS)
+
+info:
+
+dvi:
+
+check:
+
+install-exec: install-binPROGRAMS
+
+install: install-exec
+	@:
+
+uninstall: uninstall-binPROGRAMS
+
+installdirs:
+	$(top_srcdir)/mkinstalldirs  $(bindir)
+
+
+mostlyclean-generic:
+	test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	rm -f Makefile $(DISTCLEANFILES)
+	rm -f config.cache config.log $(CONFIG_HEADER) stamp-h
+
+maintainer-clean-generic:
+	test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean:  mostlyclean-binPROGRAMS mostlyclean-compile \
+mostlyclean-tags mostlyclean-generic
+
+clean:  clean-binPROGRAMS clean-compile clean-tags \
+clean-generic mostlyclean 
+
+distclean:  distclean-binPROGRAMS distclean-compile \
+distclean-tags distclean-generic clean 
+	rm -f config.status
+
+maintainer-clean:  maintainer-clean-binPROGRAMS maintainer-clean-compile \
+maintainer-clean-tags maintainer-clean-generic \
+distclean 
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: default mostlyclean-binPROGRAMS distclean-binPROGRAMS \
+clean-binPROGRAMS maintainer-clean-binPROGRAMS uninstall-binPROGRAMS \
+mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile \
+tags mostlyclean-tags distclean-tags clean-tags \
+maintainer-clean-tags dist all info dvi install-exec \
+install uninstall installdirs mostlyclean-generic distclean-generic \
+clean-generic maintainer-clean-generic clean mostlyclean distclean \
+maintainer-clean
+
+$(PROGRAMS): $(LDADD)
+
+.SUFFIXES:
+.SUFFIXES: .c .o .y
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:
+
+$(nedit_OBJECTS): ../config.h
+$(nc_OBJECTS): ../config.h
+
+clearcase.o: clearcase.h
+file.o: ../util/misc.h ../util/DialogF.h ../util/fileUtils.h
+file.o: ../util/getfiles.h ../util/printUtils.h textBuf.h text.h nedit.h
+file.o: window.h preferences.h undo.h file.h menu.h server.h highlight.h shell.h
+file.o: clearcase.h
+help.o: ../util/misc.h textBuf.h nedit.h help.h
+highlight.o: ../util/misc.h ../util/DialogF.h
+highlight.o: textBuf.h textDisp.h text.h textP.h nedit.h 
+highlight.o: regularExp.h highlight.h highlightData.h preferences.h 
+highlight.o: window.h search.h
+highlightData.o: ../util/misc.h ../util/DialogF.h ../util/managedList.h 
+highlightData.o: textBuf.h nedit.h highlight.h regularExp.h preferences.h 
+highlightData.o: help.h window.h highlightData.h
+interpret.o: textBuf.h nedit.h menu.h text.h interpret.h 
+macro.o: ../util/DialogF.h ../util/misc.h textBuf.h text.h nedit.h
+macro.o: window.h macro.h preferences.h interpret.h parse.h search.h 
+macro.o: shell.h userCmds.h selection.h
+menu.o: ../util/getfiles.h ../util/fontsel.h ../util/DialogF.h
+menu.o: ../util/misc.h ../util/fileUtils.h textBuf.h text.h nedit.h
+menu.o: file.h menu.h window.h search.h selection.h undo.h shift.h
+menu.o: help.h preferences.h tags.h userCmds.h shell.h macro.h
+menu.o: highlight.h highlightData.h interpret.h smartIndent.h
+nc.o: ../util/fileUtils.h ../util/prefFile.h server_common.h
+nedit.o: ../util/misc.h ../util/printUtils.h ../util/fileUtils.h
+nedit.o: ../util/getfiles.h textBuf.h nedit.h file.h preferences.h regularExp.h
+nedit.o: selection.h tags.h menu.h macro.h server_common.h server.h interpret.h
+nedit.o: parse.h
+preferences.o: ../util/prefFile.h ../util/misc.h ../util/DialogF.h
+preferences.o: ../util/managedList.h ../util/fontsel.h textBuf.h nedit.h text.h
+preferences.o: search.h preferences.h window.h userCmds.h highlight.h highlightData.h
+preferences.o: help.h regularExp.h smartIndent.h server_common.h
+regularExp.o: regularExp.h
+search.o: ../util/DialogF.h ../util/misc.h regularExp.h textBuf.h text.h nedit.h
+search.o: search.h window.h preferences.h
+selection.o: ../util/DialogF.h ../util/fileUtils.h textBuf.h text.h nedit.h
+selection.o: selection.h file.h window.h menu.h search.h
+server.o: ../util/fileUtils.h textBuf.h nedit.h window.h file.h selection.h
+server.o: macro.h menu.h server_common.h server.h preferences.h
+server_common.o: ../util/fileUtils.h textBuf.h nedit.h
+server_common.o: clearcase.h server_common.h
+shell.o: ../util/DialogF.h ../util/misc.h textBuf.h text.h nedit.h window.h
+shell.o: preferences.h file.h shell.h macro.h interpret.h
+shift.o: ../util/DialogF.h textBuf.h text.h nedit.h shift.h window.h
+smartIndent.o: ../util/DialogF.h ../util/misc.h textBuf.h nedit.h text.h
+smartIndent.o: preferences.h interpret.h macro.h window.h parse.h shift.h
+smartIndent.o: smartIndent.h
+tags.o: ../util/DialogF.h ../util/fileUtils.h textBuf.h text.h nedit.h
+tags.o: window.h file.h search.h selection.h preferences.h tags.h
+text.o: textBuf.h textDisp.h textP.h textSel.h textDrag.h
+textBuf.o: textBuf.h
+textDisp.o: textBuf.h textDisp.h
+textDrag.o: textBuf.h textDisp.h textP.h textDrag.h
+textSel.o: textBuf.h textDisp.h textP.h textSel.h
+undo.o: textBuf.h text.h nedit.h undo.h search.h window.h file.h userCmds.h
+userCmds.o: ../util/DialogF.h ../util/misc.h ../util/managedList.h textBuf.h
+userCmds.o: text.h nedit.h preferences.h window.h menu.h shell.h macro.h file.h
+userCmds.o: interpret.h parse.h
+window.o: ../util/DialogF.h ../util/misc.h textBuf.h textSel.h text.h textDisp.h
+window.o: textP.h nedit.h window.h menu.h file.h search.h undo.h preferences.h
+window.o: selection.h highlight.h smartIndent.h userCmds.h nedit.bm n.bm
+window.o: clearcase.h server.h shell.h

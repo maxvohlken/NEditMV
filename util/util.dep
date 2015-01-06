@@ -1,0 +1,47 @@
+# Microsoft Developer Studio Generated Dependency File, included by util.mak
+
+.\DialogF.c : \
+	".\DialogF.h"\
+	".\misc.h"\
+	
+
+.\fileUtils.c : \
+	".\fileUtils.h"\
+	".\VMSparam.h"\
+	
+
+.\fontsel.c : \
+	".\DialogF.h"\
+	".\fontsel.h"\
+	".\misc.h"\
+	
+
+.\getfiles.c : \
+	".\fileUtils.h"\
+	".\getfiles.h"\
+	".\misc.h"\
+	".\VMSparam.h"\
+	
+
+.\managedList.c : \
+	".\managedList.h"\
+	".\misc.h"\
+	
+
+.\misc.c : \
+	".\DialogF.h"\
+	".\misc.h"\
+	
+
+.\prefFile.c : \
+	".\prefFile.h"\
+	".\VMSparam.h"\
+	
+
+.\printUtils.c : \
+	".\DialogF.h"\
+	".\misc.h"\
+	".\prefFile.h"\
+	".\printUtils.h"\
+	".\VMSparam.h"\
+	

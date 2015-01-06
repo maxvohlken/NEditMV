@@ -1,0 +1,274 @@
+# Makefile.in generated automatically by automake 0.28 from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy, distribute and modify it.
+
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+AR = @AR@
+RANLIB = @RANLIB@
+PURIFY = @PURIFY@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+AUTOMAKE_OPTIONS = 
+
+bin_PROGRAMS = nedit nc
+
+DIST_OTHER = 
+DISTCLEANFILES = 
+
+INCLUDES = -I.. -I$(top_srcdir)/util -I$(srcdir)
+CONFIG_HEADER = ../config.h
+
+LDADD = ../util/libNUtil.a
+PROGRAMS = $(bin_PROGRAMS)
+
+CC = @CC@
+LEX = @LEX@
+YACC = @YACC@
+
+DEFS = @DEFS@
+CPPFLAGS = @CPPFLAGS@
+CFLAGS = @CFLAGS@
+BIGGER_STRINGS = @BIGGER_STRINGS@
+LDFLAGS = @LDFLAGS@
+MOTIF_CFLAGS = @MOTIF_CFLAGS@
+MOTIF_LDFLAGS = @MOTIF_LDFLAGS@
+MOTIF_PRE_LIBS = @MOTIF_PRE_LIBS@
+MOTIF_LIBS = @MOTIF_LIBS@
+MOTIF_EXTRA_LIBS = @MOTIF_EXTRA_LIBS@
+LIBS = @LIBS@
+
+ALL_X_LIBS = $(MOTIF_PRE_LIBS) $(MOTIF_LIBS) $(MOTIF_EXTRA_LIBS)
+COMPILE = $(CC) -c $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(MOTIF_CFLAGS)
+LINK = $(PURIFY) $(CC) $(LDFLAGS) $(MOTIF_LDFLAGS) -o $@
+
+o = .@U@o
+
+DIST_COMMON = 
+
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFOS) $(MANS) $(DIST_OTHER) $(DATA)
+
+DEP_DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFO_DEPS) $(MANS) $(DIST_OTHER) $(DATA)
+
+HEADERS = \
+ DialogF.h      fontsel.h      misc.h         printUtils.h   vmsUtils.h \
+ fileUtils.h    getfiles.h     prefFile.h     vmsParam.h \
+ managedList.h
+
+SOURCES = \
+ DialogF.c     fontsel.c     misc.c        printUtils.c \
+ fileUtils.c   getfiles.c    prefFile.c    vmsUtils.c \
+ managedList.c
+
+OBJECTS = \
+ DialogF$o     fontsel$o     misc$o        printUtils$o \
+ fileUtils$o   getfiles$o    prefFile$o    vmsUtils$o \
+ managedList$o
+
+default: all
+
+
+#$(srcdir)/Makefile.in: Makefile.am
+#	cd $(top_srcdir) && automake $(subdir)/Makefile
+
+Makefile: ../config.status Makefile.in
+	cd .. && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+
+mostlyclean-binPROGRAMS:
+
+clean-binPROGRAMS:
+	rm -f $(bin_PROGRAMS)
+
+distclean-binPROGRAMS:
+
+maintainer-clean-binPROGRAMS:
+
+install-binPROGRAMS: all
+	$(top_srcdir)/mkinstalldirs $(bindir)
+	for p in $(bin_PROGRAMS); do		\
+	  if test -f $$p; then			\
+	    $(INSTALL_PROGRAM) $$p $(bindir)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi				\
+	done
+
+uninstall-binPROGRAMS:
+	for p in $(bin_PROGRAMS); do \
+	  rm -f $(bindir)/`echo $$p|sed '$(transform)'`; \
+	done
+
+.c.o:
+	$(COMPILE) $<
+
+mostlyclean-compile:
+	rm -f *.o core
+
+clean-compile:
+	rm -f *.a
+
+distclean-compile:
+	rm -f *.tab.c
+
+maintainer-clean-compile:
+
+ID:	$(HEADERS) $(SOURCES)
+	here=`pwd` && cd $(srcdir) && mkid -f $$here/ID $(SOURCES) $(HEADERS)
+
+tags: TAGS
+
+TAGS:
+	here=`pwd` && cd $(srcdir) && etags $(ETAGS_ARGS) $(SOURCES) $(HEADERS) -o $$here/TAGS
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	rm -f TAGS ID
+
+maintainer-clean-tags:
+
+subdir = util
+distdir = ../$(PACKAGE)-$(VERSION)/$(subdir)
+dist: $(DEP_DISTFILES)
+	@for file in $(DISTFILES); do		\
+	  test -f $(distdir)/$$file \
+	  || ln $(srcdir)/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $(srcdir)/$$file $(distdir)/$$file; \
+	done
+
+all: libNUtil.a
+
+libNUtil.a: $(OBJECTS)
+	$(AR) libNUtil.a $(OBJECTS)
+	$(RANLIB) libNUtil.a
+
+printUtils.o: printUtils.c
+	$(COMPILE) $(PRINTFLAGS) $<
+
+info:
+
+dvi:
+
+check:
+
+install-exec: install-binPROGRAMS
+
+install: install-exec
+	@:
+
+uninstall: uninstall-binPROGRAMS
+
+installdirs:
+	$(top_srcdir)/mkinstalldirs  $(bindir)
+
+
+mostlyclean-generic:
+	test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	rm -f Makefile $(DISTCLEANFILES)
+	rm -f config.cache config.log $(CONFIG_HEADER) stamp-h
+
+maintainer-clean-generic:
+	test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean:  mostlyclean-binPROGRAMS mostlyclean-compile \
+mostlyclean-tags mostlyclean-generic
+
+clean:  clean-binPROGRAMS clean-compile clean-tags \
+clean-generic mostlyclean 
+
+distclean:  distclean-binPROGRAMS distclean-compile \
+distclean-tags distclean-generic clean 
+	rm -f config.status
+
+maintainer-clean:  maintainer-clean-binPROGRAMS maintainer-clean-compile \
+maintainer-clean-tags maintainer-clean-generic \
+distclean 
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: default mostlyclean-binPROGRAMS distclean-binPROGRAMS \
+clean-binPROGRAMS maintainer-clean-binPROGRAMS uninstall-binPROGRAMS \
+mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile \
+tags mostlyclean-tags distclean-tags clean-tags \
+maintainer-clean-tags dist all info dvi check installcheck install-exec \
+install uninstall installdirs mostlyclean-generic distclean-generic \
+clean-generic maintainer-clean-generic clean mostlyclean distclean \
+maintainer-clean
+
+
+$(PROGRAMS): $(LDADD)
+
+version.c: stamp-v
+stamp-v: Makefile
+	rm -f t-version.c
+	echo '#include <config.h>' > t-version.c
+	echo '#include "version.h"' >> t-version.c
+	echo 'const char *version_string = "'GNU @PACKAGE@ @VERSION@'";' \
+		>> t-version.c
+	if cmp -s version.c t-version.c; then	\
+	  rm t-version.c;			\
+	else					\
+	  mv t-version.c version.c;		\
+	fi
+	echo timestamp > $@
+
+.SUFFIXES:
+.SUFFIXES: .c .o
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:
+
+$(OBJECTS): ../config.h
+
+DialogF.o: misc.h DialogF.h
+fileUtils.o: fileUtils.h
+fontsel.o: DialogF.h misc.h fontsel.h
+getfiles.o: fileUtils.h misc.h getfiles.h
+managedList.o: misc.h managedList.h
+misc.o: DialogF.h misc.h
+prefFile.o: prefFile.h
+printUtils.o: DialogF.h misc.h prefFile.h printUtils.h
+vmsUtils.c: vmsUtils.h

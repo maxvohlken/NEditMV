@@ -1,0 +1,210 @@
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(source/textBuf.c)
+AC_CONFIG_HEADER(config.h)
+AC_CANONICAL_SYSTEM
+
+PACKAGE=NEditMV
+VERSION='5.0.1'
+VERSION_DATE='April 13, 2012'
+MV_PATCH=15
+MV_PATCH_DATE=`echo esyscmd([date '+%B %d, %Y'])`
+
+# We require x and motif.
+if test x"$with_x" = xno; then
+	with_x=yes
+fi
+if test x"$with_motif" = xno; then
+	with_motif=yes
+fi
+
+AC_SUBST(PACKAGE)
+AC_SUBST(VERSION)
+AC_SUBST(VERSION_DATE)
+AC_SUBST(MV_PATCH)
+AC_SUBST(MV_PATCH_DATE)
+
+dnl Checks for programs.
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_CC
+AC_PROG_MAKE_SET
+AC_PROG_CPP
+AC_PROG_GCC_TRADITIONAL
+AC_PROG_RANLIB
+AC_PROG_YACC
+AC_AIX
+AC_MINIX
+AC_ISC_POSIX
+AC_CHECK_PROG(AR, ar, ar cr, ar cr)
+
+AC_CHECK_PROG(LP, lp, lp, lpr)
+if test $LP = lpr; then
+	CFLAGS="$CFLAGS -DUSE_LPR_PRINT_CMD"
+fi
+
+#
+# Disable LD_LIBRARY_PATH. This can interfere with configures
+# ability to find where libraries are located.
+#
+LD_LIBRARY_PATH=; export LD_LIBRARY_PATH
+
+dnl Checks for libraries.
+
+dnl X_LIBS='-lXm -lXt -lX11'
+
+AC_PATH_MOTIF
+AC_PATH_MOTIF_XTRA
+
+dnl We can't continue without the motif libraries
+if test "x$have_motif" != xyes; then
+	cat <<EOF
+
+Configure was unable to determine where your Motif libraries
+and include files are installed. Motif is required to build NEdit.
+You can tell configure where Motif is installed with the --with-motif
+option.
+
+  --with-motif=[DIR | INCDIR:LIBDIR]
+
+EOF
+	exit 1
+fi
+
+dnl Checks for header files.
+AC_HEADER_DIRENT
+AC_HEADER_STDC
+AC_CHECK_FUNCS(strchr memcpy memmove)
+AC_HEADER_SYS_WAIT
+AC_CHECK_HEADERS(fcntl.h limits.h sys/time.h sys/select.h sys/param.h unistd.h glob.h sys/utsname.h utime.h)
+
+ac_save_CPPFLAGS="$CPPFLAGS"
+CPPFLAGS="$MOTIF_CFLAGS $CPPFLAGS"
+AC_CHECK_HEADERS(X11/Xlocale.h)
+AC_CHECK_HEADERS(X11/Xmu/Editres.h)
+CPPFLAGS="$ac_save_CPPFLAGS"
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_C_INLINE
+AC_TYPE_PID_T
+AC_HEADER_TIME
+
+dnl Checks for library functions.
+AC_FUNC_ALLOCA
+AC_FUNC_UTIME_NULL
+AC_FUNC_VPRINTF
+AC_CHECK_FUNCS(atexit getcwd on_exit select)
+AC_CHECK_FUNCS(strcasecmp strcspn strerror strspn strstr strtod strtol usleep)
+AC_CHECK_LIB(m, pow)
+
+ac_save_LDFLAGS="$LDFLAGS"
+ac_save_LIBS="$LIBS"
+LIBS="$MOTIF_LIBS $MOTIF_EXTRA_LIBS $LIBS"
+LDFLAGS="$MOTIF_LDFLAGS $LDFLAGS"
+AC_CHECK_FUNCS(XSupportsLocale)
+AC_CHECK_FUNCS(_XEditResCheckMessages)
+AC_CHECK_FUNCS(_XmOSGetDirEntries)
+AC_CHECK_FUNCS(XmImRegister)
+LDFLAGS="$ac_save_LDFLAGS"
+LIBS="$ac_save_LIBS"
+
+AC_SUBST(U)
+
+# See if the user want to use purify by default.
+AC_ARG_ENABLE(purify, [  --enable-purify         enable purify], [dnl
+	if test x"$enableval" != xno; then
+		PURIFY=purify
+	fi
+])
+AC_SUBST(PURIFY)
+
+check_for_bigger_strings() {
+	ac_bigger_string_option="$1"
+	if test $ac_cv_prog_gcc != yes; then
+		AC_MSG_CHECKING([for the compiler option for large string constants])
+		ac_save_CFLAGS="$CFLAGS"
+		CFLAGS="$ac_save_CFLAGS $ac_bigger_string_option"
+		AC_TRY_COMPILE(, , [BIGGER_STRINGS="$ac_bigger_string_option"], [BIGGER_STRINGS=''])
+		CFLAGS="$ac_save_CFLAGS"
+		AC_MSG_RESULT($BIGGER_STRINGS)
+	fi
+}
+
+# OS specific stuff.
+case "$target" in
+*-*-aix*)
+	# Need -DIBM_FWRITE_BUG on AIX. Not sure which version has a problem.
+	CFLAGS="$CFLAGS -DIBM_FWRITE_BUG"
+	;;
+*-sequent-*)
+	# fcntl and strcasecmp are in libsocket on Sequent Dynix.
+	AC_CHECK_LIB(socket, fcntl, , , -lnsl)
+	AC_CHECK_LIB(socket, strcasecmp, , , -lnsl)
+	;;
+*-*-hpux*)
+	# -Ae is required for cc on HPUX.
+	case "$CC" in
+	cc*|*/cc*)
+		if echo "$CFLAGS" | grep -- '-Ae' >/dev/null 2>&1; then
+			:
+		else
+			CFLAGS="$CFLAGS -Ae"
+		fi
+		;;
+	esac
+
+	# Need to see if the compiler needs special options to compile the
+	# long strings in help.c and text.c.
+	check_for_bigger_strings '-Wp,-H20000'
+	
+	# Link in /usr/lib/end.o if it exists.
+	if test -f /usr/lib/end.o; then
+		LIBS="$LIBS /usr/lib/end.o"
+	fi
+	;;
+*-*-irix*)
+    # See if the user wants to enable X stuff specific to SGI.
+	AC_ARG_ENABLE(sgi-custom, [  --enable-sgi-custom     enable X stuff specific to SGI], [dnl
+	if test x"$enableval" != xno; then
+		CFLAGS="$CFLAGS -DSGI_CUSTOM"
+	fi
+])
+	
+	# Need to see if the compiler needs special options to compile the
+	# long strings in help.c and text.c.
+	check_for_bigger_strings '-Wf,-XNl10000'
+	;;
+*-*-sunos4*)
+	;;
+*-*-solaris*)
+	# Need -DROWCOLPATCH for Solaris Motif 1.2.3.
+	CFLAGS="$CFLAGS -DROWCOLPATCH"
+	;;
+*-*-ultrix*)
+	# Need to see if the compiler needs special options to compile the
+	# long strings in help.c and text.c.
+	check_for_bigger_strings '-Wf,-XNl8192'
+	;;
+esac
+AC_SUBST(BIGGER_STRINGS)
+
+# See if the user wants to enable the right button menu.
+AC_ARG_ENABLE(right-button-menu, [  --enable-right-button-menu     enable the right mouse button popup menu],
+	[if test x"$enableval" != xno; then
+    CFLAGS="$CFLAGS -DRIGHT_POPUP"
+  fi])
+
+# See if the user wants to enable the environment as global in macros.
+AC_ARG_ENABLE(environment-as-macro-globals, [  --enable-environment-as-macro-globals     enable the addition of the environment as macro globals],
+	[if test x"$enableval" != xno; then
+    CFLAGS="$CFLAGS -DUSE_ENVIRONMENT_AS_MACRO_GLOBALS"
+  fi])
+
+# Add a define for the PACKAGE name
+[CFLAGS="$CFLAGS -DPACKAGE=""'"'"'"$PACKAGE"'"'"'"]
+
+CONFIGURE_DATE=`date`
+AC_SUBST(CONFIGURE_DATE)
+
+AC_OUTPUT(util/Makefile source/Makefile Makefile source/MVversion.h)
+

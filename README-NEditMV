@@ -1,0 +1,396 @@
+                                                              02/21/2000
+
+This document describes how the MV version of NEdit differs
+from the official version of NEdit.
+
+ Selection Stuff:
+ 
+ * Updated the selection mechanism to be able to do extension by words
+   or lines based on how the selection was initially done.
+ * Added word selection by groups of like characters. Like characters
+   are newline, space or tab, non-delimiter characters and the delimiter 
+   characters minus the newline, space and tab.
+ * Added 'nedit*text.dragStartsOnCharacter' resource to control if the
+   the character under the mouse is selected when dragging to the right
+   even though the I-bar is to the left of the character. It is disabled
+   by default.
+ * Added 'nedit*text.enableQuadrupleClick' resource to control if 
+   quadruple click is enabled to select all of the text. It is enabled
+   by default.
+ * Added the ability for the Cut, Copy, and Paste keys to control
+   the secondary selection as they do in textedit on Solaris. See 
+   'Help|Using the Mouse' for the translation table example.
+ * Added an example to the help file of the translation table to
+   enable the use of the Shift key to control the secondary selection.
+   See 'Help|Using the Mouse' for the details.
+ * Added the ability to drag the primary selection with the left
+   mouse button. See 'Help|Using the Mouse' for the translation
+   table example.
+ * Replaced the move-secondary-or-cut-clipboard,
+   copy-secondary-or-paste-clipboard, exchange-or-copy-clipboard actions
+   with the generic action secondary-or-clipboard that takes as its
+   first argument the secondary action to perform when there is a
+   secondary selection and as its second argument the clipboard action
+   to perform if there is no secondary selection. The valid first
+   arguments are 'copy', 'move', and 'exchange'. The valid second
+   arguments are 'copy', 'cut' and 'paste'. The following are equivalent.
+   move-secondary-or-cut-clipboard() = secondary-or-clipboard(move, cut)
+   copy-secondary-or-paste-clipboard() = secondary-or-clipboard(copy, paste)
+   exchange-or-copy-clipboard() = secondary-or-clipboard(exchange, copy)
+ * Removed the default right mouse button bindings. If you want the
+   right mouse button to extend the selection you will have to modify
+   NEdits translation table in your .Xdefaults file. See 'Help|Using 
+   the Mouse' for the translation table examples.
+ * Re-enabled the use of the textNselectForeground and 
+   textNhighlightForeground resources in syntax highlight mode.
+   If you do not like this behavior then recompile with 
+   IGNORE_SELECT_FOREGROUND_COLOR or IGNORE_HIGHLIGHT_FOREGROUND_COLOR
+   defined.
+
+ Editing Stuff:
+
+ * Added the ability to have multiple windows that edit the
+   same file. Try 'Windows|Clone Window'.
+ * Changed the forward word action to move the cursor to the end of the
+   word instead of the beginning. This is how textedit and emacs do it.
+ * Added arguments to the beginning-of-line/end-of-line actions to
+   control the toggling between the beginning/end of the line and
+   the first/last non-whitespace character. It works as follows.
+   
+   beginning-of-line()
+       always goes to the beginning of the line.
+   beginning-of-line(non-space)
+       always goes to the first non-whitespace character.
+   beginning-of-line(toggle)
+       first goes to the beginning of the line and then toggles 
+       between the first non-whitespace character and the beginning
+       of the line.
+   beginning-of-line(toggle, non-space)
+       first goes to the first non-whitespace character and then  
+       toggles between the beginning of the line and the first
+       non-whitespace character.
+
+   end-of-line()
+       always goes to the end of the line.
+   end-of-line(non-space)
+       always goes to the last non-whitespace character.
+   end-of-line(toggle)
+       first goes to the end of the line and then toggles 
+       between the last non-whitespace character and the end
+       of the line.
+   end-of-line(toggle, non-space)
+       first goes to the last non-whitespace character and then  
+       toggles between the end of the line and the last
+       non-whitespace character.
+      
+   Here is an example of a .Xdefaults entry with the toggle argument added.
+   
+nedit*text.Translations: #override \
+   Alt Shift <KeyPress>osfBeginLine: beginning-of-line(toggle, extend, rect)\n\
+  Meta Shift <KeyPress>osfBeginLine: beginning-of-line(toggle, extend, rect)\n\
+       Shift <KeyPress>osfBeginLine: beginning-of-line(toggle, extend)\n\
+             <KeyPress>osfBeginLine: beginning-of-line(toggle)\n\
+   Alt Shift <KeyPress>osfEndLine: end-of-line(toggle, extend, rect)\n\
+  Meta Shift <KeyPress>osfEndLine: end-of-line(toggle, extend, rect)\n\
+       Shift <KeyPress>osfEndLine: end-of-line(toggle, extend)\n\
+             <KeyPress>osfEndLine: end-of-line(toggle)\n
+ 
+ Search Stuff:
+ 
+ * Removed the find dialog. Added a find button to the
+   replace dialog instead. Also made it the default button.
+ * Added a replace and find action that replaces the current selection and
+   then finds the next occurance. Action names: replace-find and 
+   replace-find-same. Added a Replace & Find button to the replace
+   dialog. Also added a menu item for it.
+ * Incremental search text field just below the menu bar with an
+   ignore case and regular expression toggle button. Note that the
+   'Search:' label is a hidden push button that can be used to 
+   hide the search bar.
+ * Backward incremental search with Shift+Find Incremental.
+ * Shift+Return or Ctrl+Return in Search text field toggles the search 
+   direction.
+ * Added separate Find and Replace menu items. The Find menu item
+   will popup the Find/Replace dialog and will make the Find button
+   the default button. The Replace menu item will also popup the
+   Find/Replace dialog but it will make the Replace & Find button the
+   default instead.
+ * Updated the following menu accelerators.
+       Menu item                   Before     Now
+    -----------------------------|----------|-------
+    Search|Find Incremental      | Ctrl+F   | Ctrl+T
+    Search|Find/Replace...       | Ctrl+R   | not used
+    Search|Find...               | not used | Ctrl+F
+    Search|Replace...            | not used | Ctrl+R
+    Search|Replace Same          | Alt+T    | Alt+T
+    Search|Find And Replace Same | Ctrl+T   | Alt+R
+    
+    The resource to set these are:
+    
+    nedit*searchMenu.find.accelerator: Ctrl<Key>f
+    nedit*searchMenu.find.acceleratorText: [Shift]Ctrl+F
+    nedit*searchMenu.findShift.accelerator: Shift Ctrl<Key>f
+    nedit*searchMenu.replace.accelerator: Ctrl<Key>r
+    nedit*searchMenu.replace.acceleratorText: [Shift]Ctrl+R
+    nedit*searchMenu.replaceShift.accelerator: Shift Ctrl<Key>r
+    nedit*searchMenu.findIncremental.accelerator: Ctrl<Key>t
+    nedit*searchMenu.findIncremental.acceleratorText: [Shift]Ctrl+T
+    nedit*searchMenu.findIncrementalShift.accelerator: Shift Ctrl<Key>t
+    nedit*searchMenu.findSelection.accelerator: Ctrl<Key>h
+    nedit*searchMenu.findSelection.acceleratorText: [Shift]Ctrl+H
+    nedit*searchMenu.findSelectionShift.accelerator: Shift Ctrl<Key>h
+    nedit*searchMenu.findSame.accelerator: Ctrl<Key>g
+    nedit*searchMenu.findSame.acceleratorText: [Shift]Ctrl+G
+    nedit*searchMenu.findSameShift.accelerator: Shift Ctrl<Key>g
+    nedit*searchMenu.replaceSame.accelerator: Alt<Key>t
+    nedit*searchMenu.replaceSame.acceleratorText: [Shift]Alt+T
+    nedit*searchMenu.replaceSameShift.accelerator: Shift Alt<Key>t
+    nedit*searchMenu.replaceFindSame.accelerator: Alt<Key>r
+    nedit*searchMenu.replaceFindSame.acceleratorText: [Shift]Alt+R
+    nedit*searchMenu.replaceFindSameShift.accelerator: Shift Alt<Key>R
+
+ * Changed the default for Keep Search Dialogs Up to True.
+ * Added copying of the primary selection into the 'String to Find:'
+   field when the 'Find...' or 'Replace...' menu item are activated.
+   This is controlled by the 'nedit.findReplaceUsesSelection' resource.
+ * Added ringing of the bell when the search wraps around the 
+   beginning/end of the file when verbose search is off.
+ * Improved the flash matching feature to allow you to place the cursor
+   on the left side of the ending character.
+ * Added a goto matching character feature that moves the cursor to the
+   complimentary character matching the character next to the cursor.
+ * Changed the accelerator for 'Select Matching' from Ctrl+M to 
+   Shift+Ctrl+M and made Ctrl+M the accelerator for 'Goto Matching'.
+   Use the following resources to redefine these:
+   
+   nedit*searchMenu.match.accelerator: Shift Ctrl<Key>m
+   nedit*searchMenu.match.acceleratorText: Shift+Ctrl+M
+   nedit*searchMenu.gotoMatching.accelerator: Ctrl<Key>m
+   nedit*searchMenu.gotoMatching.acceleratorText: Ctrl+M
+   
+ * Integrated alberto@gaps.ssr.upm.es changes for a 
+   "Goto Line Number"/"Goto Selected" warning dialog.
+   
+   > 7. "Goto Line Number"/"Goto Selected" display a warning dialog if
+   >    line number is greater than number of lines in file, instead of
+   >    going to the end.
+ 
+ Preferences:
+ 
+ * Added preference to control if the Incremental Search text field is 
+   displayed. See 'Preferences|Incremental Search Line'.
+ * Removed the hardcoded selection threshold and vertical scroll delay.
+   They are now normal resources, 'nedit*text.selectThreshold' in pixels
+   and 'nedit*text.verticalScrollDelay' in milliseconds.
+ * Added a preference to enable the on exit confirmation dialog that 
+   informs you that you have more than one file open before exiting.
+   See 'Preferences|Default Settings|On Exit Open Files Warning'.
+ * Added a preference to control if the text area is editable eventhough
+   the file is read only. See 'Preferences|Default Settings|Allow Read
+   Only Edits'.
+ * Added 'nedit.findReplaceUsesSelection' resource to control if
+   the find and replace dialog is automatically loaded with the
+   contents of the primary selection.
+ * Added 'nedit.backupSuffix' resource to control the suffix used
+   to generate the name of the backup file that holds the 
+   version of the file before the last save operation.
+
+ File, Directory and Shell Command Stuff:
+
+ * Added checking if the file being edited was changed by an external 
+   source. If so the user is prompted to reread it or to turn off
+   checking altogether. This is checked every time the focus changes
+   for the text area.
+ * Added automatic update of the read only status. This is checked
+   every time the focus changes for the text area.
+ * Added a tail -f file checking mode. See Preferences|Checking Mode.
+ * Improved the Open Selected feature to treat relatives paths as if
+   they were relative to the directory of the file in the current edit
+   window. Added the ability to open multiple files by parsing the
+   selection into lines. It then checks to see if the line matches
+   the output of grep or the error output of some of the popular compilers.
+   If it matches it open the file and selects the line. If it doesn't match
+   it is assumed to be the output of ls -F. Meaning that the '*@/' are
+   ignored. Also if the first item on a line does not exist the rest of the
+   line is ignored.
+ * The current directory for a New window is inherited from the parent
+   window.
+ * The current directory for shell commands is now set to the directory
+   of the window where they were executed from.
+ * Added dialog to confirm re-load of file after command execution
+   if the buffer has been modified.
+ * Switched from using the Motif text widget in the command output dialogs
+   to using the NEdit text widget.
+ * Made the text in the command output dialogs writable.
+ * Added disabling of the modified status when the command output 
+   is into a new window so the window can be closed without being
+   prompted to save.
+ * Added moving of the insertion cursor to the beginning of the 
+   command output in a new window. This is to force it to scroll
+   back to the top.
+ * Added the ability to backslash escape the % in shell command so 
+   they don't get converted to the path of the file.
+ * Updated the title of the command output windows to have "NEdit - "
+   prepended to them to identify them as belonging to NEdit.
+ * Added modification of the mode bits to allow unconditional writes
+   to the backup file.
+ * Added expansion of '%' into the path of the current file in shell
+   commands executed by the 'Execute Command ...' menu item.
+ * Integrated alberto@gaps.ssr.upm.es changes to populate the Save As dialog
+   with the current file name.
+
+   > 1. "Save As" dialog gives, as default, the current filename (not only
+   >    its directory), like many editors and word processors do.  This is
+   >    quite easy to implement:  we have only to use "fullname" in
+   >    "PromptForNewFile" function as Input/Output argument (not only
+   >    Output).
+
+ * Integrated alberto@gaps.ssr.upm.es changes to expand %t in shell
+   commands to the current tab spacing value.
+   
+   > 3. In shell commands, "%t" expands to inner value of tab spacing
+   >    (tabDist). This can be useful for expand/unexpand commands:
+   > 
+   >          [un]expand -t %t
+   > 
+   >    expand/unexpand uses the value of the tab spacing (preferences)
+   >    in the window
+   > 
+   >    ("-t" is for HP-UX, see your system)
+   > 
+   >    NOTE: In Max's V4.0.3-color Patch 6, this also WORKS for Shell menu
+   >    commands "Execute Command...", "Execute Selection or Line with Cursor"
+   >    and "Filter selection".
+   >   
+   >    CHANGES IN SOURCES:
+   >    (see bellow in point 4, function "substitutePercent" in "source/shell.c")
+
+ * Integrated alberto@gaps.ssr.upm.es changes for shell and macro commands
+   to ASK for some argument(s)/option(s). 
+ 
+   > 4. Added the possibility for shell and macro commands to ASK for
+   >    some argument(s)/option(s). I've made some modifications to allow
+   >    commands to understand the following sintax:
+   > 
+   >             %:message:default_value%
+   > 
+   >    where: "%:" indicates the beginning of the sintax. Its special
+   >                meaning could be escaped with backslash: ("\%: in
+   >                shell commmands and "\\%:" in macro commands):
+   > 
+   >            message: is the asking message thet appears in the dialog
+   >                box (plus a ':' character added at the end). Inside
+   >                message, only ':' is a special character. If you want
+   >                to include it in the message, use "\:" ("\\:" in macros)
+   > 
+   >            ":" separator
+   > 
+   >            default_value: default value for argument/option in dialog
+   >                box. Could be an empty string (i.e.: %:message:%).
+   >                Inside default_value,  only '%' is a special character.
+   >                If you want to include it in the message, use "\%"
+   >                ("\\%" in macros)
+   >                
+   >            "%" sintax end
+   > 
+   >    EXAMPLES:
+   > 
+   >     - Macro command:
+   > 
+   >         replace-in-selection("^", "%:First Character(s):\\%%", "regex")
+   >         
+   >         This command asks for the first character(s) that it will insert
+   >         at the beginning of line. This could be useful to comment out
+   >         selected lines. The default value is "%" (escaped with "\\"),
+   >         which is comment for MATLAB scripts/functions.
+   >         In dialog box, you can delete "%" and type "#" (shell scripts),
+   >         "!" (X resource files), "//" (C++), ...
+   > 
+   >     - Shell command:
+   > 	On HP-UX, the  command  "adjust"  is a simple but useful  text
+   > 	formatter.  With option "-j", it justifies  both  margins, and
+   > 	"-mXX" set the right margin value to XX (left  margin  remains
+   > 	as is).  So, we can create the shell command:
+   > 
+   >             Command Input:  selection
+   >             Command Output: same window
+   >             Shell command to Execute:
+   >                       adjust -j -m%:Right Margin:70%
+   > 
+   >              (or: adjust %:Adjust options:-j -m70% if you want the
+   >               capability of changing full options)
+
+
+ Tags Stuff:
+
+ * Added a warning dialog that the tags file has not been loaded when 
+   searching for a definition.
+ * Added the search string used to find the definition to the 
+   search history.
+ * Integrated alberto@gaps.ssr.upm.es changes to remove the backslash
+   from the ctags expression.
+
+	> 8. In tags files generated with "ctags", at least on HP-UX 9.XX, 
+	>    special characters are "escaped" with backslash. For example:
+	>    definition of macro in "source/nedit.h":
+	> 
+	> #define SET_ONE_RSRC(widget, name, newValue) \
+	> ...
+	> 
+	>    If I execute "ctags nedit.h", in "tags" file appears:
+	> 
+	> SET_ONE_RSRC    nedit.h /^#define SET_ONE_RSRC(widget, name, newValue) \\$/
+	> 
+	>    Backslash is duplicated (escaping itself), so "Find Definition" command
+	>    will not work well, because in "nedit.h" does not exist the string
+	>    between '^' and '$' (i.e. with duplicated backslash).
+
+
+ NEdit Server Stuff:
+ 
+ * Clearcase awareness.
+   * nc knows to connect only to the nedit server that was started in
+     the same view that the current nc was invoked from.
+ * Replace the internals of -srvname with my server name code.
+   Each server is identified by its name from the -srvname option,
+   the user name of the user, and the clearcase view tag if 
+   $CLEARCASE_ROOT is set.
+ * Added -sn option to nc as shorthand for -srvname.
+ * Added -wait option to nc that causes nc to wait for the file or 
+   files listed to be closed.
+ * Added -openwait option to nc that causes nc to wait for the file
+   or files listed to be opened.
+ * nc now also waits for the server to start before exiting.
+ * Added code to nedit to put itself into the background when running
+   in server mode.
+ * Added the ability to allow files opened by nedit and nc to be iconic
+   if nedit was started with the -iconic argument but for files opened
+   from the File menu to always be opened on top of the other windows.
+ * Added propagation of the display value from nc to the nedit server
+   at server startup.
+ 
+ Miscellaneous:
+
+ * Added support for the GNU auto configure utility.
+ * Clearcase awareness.
+   * Added display of the current view in the title bar.
+   * Support for version extended path names.
+ * Added display of the directory in the Windows menu.
+ * Added the directory of the current file to the window's title bar.
+ * Updated the title bar to display the name of the nedit server.
+ * Added --enable-static-x configure argument that forces static
+   linking of the Motif and X libraries.
+ * Changed the Class name of the NEdit text widget from 'Text' to
+   'NEditText'.
+ * Added the ability to escape the submenu character(>) with a backslash.
+
+----------------------------------------------------------------------
+ Max Vohlken
+ Rational Software
+ max.vohlken@rational.com
+----------------------------------------------------------------------
+
+Rational Software nor the company formerly known as Pure Atria make no
+warranty, expressed or implied, or assumes any legal liability or
+responsibility for the accuracy, completeness, or usefulness of this
+code.

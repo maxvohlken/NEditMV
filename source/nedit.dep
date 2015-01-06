@@ -1,0 +1,394 @@
+# Microsoft Developer Studio Generated Dependency File, included by nedit.mak
+
+.\clearcase.c : \
+	".\clearcase.h"\
+	
+
+.\file.c : \
+	"..\util\DialogF.h"\
+	"..\util\fileUtils.h"\
+	"..\util\getfiles.h"\
+	"..\util\misc.h"\
+	"..\util\printUtils.h"\
+	"..\util\VMSparam.h"\
+	".\clearcase.h"\
+	".\file.h"\
+	".\highlight.h"\
+	".\menu.h"\
+	".\nedit.h"\
+	".\preferences.h"\
+	".\server.h"\
+	".\shell.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\undo.h"\
+	".\window.h"\
+	
+
+.\help.c : \
+	"..\util\DialogF.h"\
+	"..\util\misc.h"\
+	"..\util\VMSparam.h"\
+	".\file.h"\
+	".\help.h"\
+	".\MVversion.h"\
+	".\nedit.h"\
+	".\preferences.h"\
+	".\search.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\textSel.h"\
+	".\window.h"\
+	
+
+.\highlight.c : \
+	"..\util\DialogF.h"\
+	"..\util\misc.h"\
+	"..\util\VMSparam.h"\
+	".\highlight.h"\
+	".\highlightData.h"\
+	".\nedit.h"\
+	".\preferences.h"\
+	".\regularExp.h"\
+	".\search.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\textDisp.h"\
+	".\textP.h"\
+	".\window.h"\
+	
+
+.\highlightData.c : \
+	"..\util\DialogF.h"\
+	"..\util\managedList.h"\
+	"..\util\misc.h"\
+	"..\util\VMSparam.h"\
+	".\help.h"\
+	".\highlight.h"\
+	".\highlightData.h"\
+	".\nedit.h"\
+	".\preferences.h"\
+	".\regularExp.h"\
+	".\textBuf.h"\
+	".\window.h"\
+	
+
+.\interpret.c : \
+	"..\util\VMSparam.h"\
+	".\interpret.h"\
+	".\menu.h"\
+	".\nedit.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	
+
+.\macro.c : \
+	"..\util\DialogF.h"\
+	"..\util\misc.h"\
+	"..\util\VMSparam.h"\
+	".\interpret.h"\
+	".\macro.h"\
+	".\nedit.h"\
+	".\parse.h"\
+	".\preferences.h"\
+	".\search.h"\
+	".\selection.h"\
+	".\server.h"\
+	".\shell.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\userCmds.h"\
+	".\window.h"\
+	
+
+.\menu.c : \
+	"..\util\DialogF.h"\
+	"..\util\fileUtils.h"\
+	"..\util\fontsel.h"\
+	"..\util\getfiles.h"\
+	"..\util\misc.h"\
+	"..\util\VMSparam.h"\
+	".\file.h"\
+	".\help.h"\
+	".\highlight.h"\
+	".\highlightData.h"\
+	".\interpret.h"\
+	".\macro.h"\
+	".\menu.h"\
+	".\nedit.h"\
+	".\preferences.h"\
+	".\search.h"\
+	".\selection.h"\
+	".\shell.h"\
+	".\shift.h"\
+	".\smartIndent.h"\
+	".\tags.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\undo.h"\
+	".\userCmds.h"\
+	".\window.h"\
+	
+
+.\nedit.c : \
+	"..\util\fileUtils.h"\
+	"..\util\getfiles.h"\
+	"..\util\misc.h"\
+	"..\util\printUtils.h"\
+	"..\util\VMSparam.h"\
+	"..\util\VMSutils.h"\
+	".\file.h"\
+	".\interpret.h"\
+	".\macro.h"\
+	".\menu.h"\
+	".\nedit.h"\
+	".\parse.h"\
+	".\preferences.h"\
+	".\regularExp.h"\
+	".\selection.h"\
+	".\server.h"\
+	".\server_common.h"\
+	".\tags.h"\
+	".\textBuf.h"\
+	
+
+.\parse.c : \
+	"..\util\VMSparam.h"\
+	".\interpret.h"\
+	".\nedit.h"\
+	".\parse.h"\
+	".\textBuf.h"\
+	
+
+.\preferences.c : \
+	"..\util\DialogF.h"\
+	"..\util\fontsel.h"\
+	"..\util\managedList.h"\
+	"..\util\misc.h"\
+	"..\util\prefFile.h"\
+	"..\util\VMSparam.h"\
+	".\help.h"\
+	".\highlight.h"\
+	".\highlightData.h"\
+	".\nedit.h"\
+	".\preferences.h"\
+	".\regularExp.h"\
+	".\search.h"\
+	".\server.h"\
+	".\server_common.h"\
+	".\smartIndent.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\userCmds.h"\
+	".\window.h"\
+	
+
+.\regularExp.c : \
+	".\regularExp.h"\
+	
+
+.\search.c : \
+	"..\util\DialogF.h"\
+	"..\util\misc.h"\
+	"..\util\VMSparam.h"\
+	".\nedit.h"\
+	".\preferences.h"\
+	".\regularExp.h"\
+	".\search.h"\
+	".\server.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\window.h"\
+	
+
+.\selection.c : \
+	"..\util\DialogF.h"\
+	"..\util\fileUtils.h"\
+	"..\util\VMSparam.h"\
+	".\file.h"\
+	".\menu.h"\
+	".\nedit.h"\
+	".\search.h"\
+	".\selection.h"\
+	".\server.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\window.h"\
+	
+
+.\server.c : \
+	"..\util\fileUtils.h"\
+	"..\util\misc.h"\
+	"..\util\VMSparam.h"\
+	"..\util\VMSutils.h"\
+	".\file.h"\
+	".\macro.h"\
+	".\menu.h"\
+	".\nedit.h"\
+	".\preferences.h"\
+	".\selection.h"\
+	".\server.h"\
+	".\server_common.h"\
+	".\textBuf.h"\
+	".\window.h"\
+	
+
+.\server_common.c : \
+	"..\util\fileUtils.h"\
+	"..\util\VMSparam.h"\
+	"..\util\VMSutils.h"\
+	".\clearcase.h"\
+	".\nedit.h"\
+	".\server_common.h"\
+	".\textBuf.h"\
+	
+
+.\shell.c : \
+	"..\util\DialogF.h"\
+	"..\util\misc.h"\
+	".\file.h"\
+	".\interpret.h"\
+	".\macro.h"\
+	".\nedit.h"\
+	".\preferences.h"\
+	".\server.h"\
+	".\shell.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\window.h"\
+	
+
+.\shift.c : \
+	"..\util\DialogF.h"\
+	"..\util\VMSparam.h"\
+	".\nedit.h"\
+	".\shift.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\window.h"\
+	
+
+.\smartIndent.c : \
+	"..\util\DialogF.h"\
+	"..\util\misc.h"\
+	"..\util\VMSparam.h"\
+	".\help.h"\
+	".\interpret.h"\
+	".\macro.h"\
+	".\nedit.h"\
+	".\parse.h"\
+	".\preferences.h"\
+	".\shift.h"\
+	".\smartIndent.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\window.h"\
+	
+
+.\tags.c : \
+	"..\util\DialogF.h"\
+	"..\util\fileUtils.h"\
+	"..\util\VMSparam.h"\
+	".\file.h"\
+	".\nedit.h"\
+	".\preferences.h"\
+	".\search.h"\
+	".\selection.h"\
+	".\server.h"\
+	".\tags.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\window.h"\
+	
+
+.\text.c : \
+	".\text.h"\
+	".\textBuf.h"\
+	".\textDisp.h"\
+	".\textDrag.h"\
+	".\textP.h"\
+	".\textSel.h"\
+	
+
+.\textBuf.c : \
+	".\textBuf.h"\
+	
+
+.\textDisp.c : \
+	".\textBuf.h"\
+	".\textDisp.h"\
+	
+
+.\textDrag.c : \
+	".\text.h"\
+	".\textBuf.h"\
+	".\textDisp.h"\
+	".\textDrag.h"\
+	".\textP.h"\
+	
+
+.\textSel.c : \
+	".\text.h"\
+	".\textBuf.h"\
+	".\textDisp.h"\
+	".\textP.h"\
+	".\textSel.h"\
+	
+
+.\undo.c : \
+	"..\util\VMSparam.h"\
+	".\file.h"\
+	".\nedit.h"\
+	".\search.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\undo.h"\
+	".\userCmds.h"\
+	".\window.h"\
+	
+
+.\userCmds.c : \
+	"..\util\DialogF.h"\
+	"..\util\managedList.h"\
+	"..\util\misc.h"\
+	"..\util\VMSparam.h"\
+	".\file.h"\
+	".\interpret.h"\
+	".\macro.h"\
+	".\menu.h"\
+	".\nedit.h"\
+	".\parse.h"\
+	".\preferences.h"\
+	".\shell.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\window.h"\
+	
+
+.\window.c : \
+	"..\util\DialogF.h"\
+	"..\util\misc.h"\
+	"..\util\VMSparam.h"\
+	".\clearcase.h"\
+	".\file.h"\
+	".\highlight.h"\
+	".\macro.h"\
+	".\menu.h"\
+	".\n.bm"\
+	".\nedit.bm"\
+	".\nedit.h"\
+	".\preferences.h"\
+	".\search.h"\
+	".\selection.h"\
+	".\server.h"\
+	".\shell.h"\
+	".\smartIndent.h"\
+	".\text.h"\
+	".\textBuf.h"\
+	".\textDisp.h"\
+	".\textP.h"\
+	".\textSel.h"\
+	".\undo.h"\
+	".\userCmds.h"\
+	".\window.h"\
+	
