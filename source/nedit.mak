@@ -87,7 +87,7 @@ CLEAN :
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
 
-CPP_PROJ=/nologo /ML /W3 /GX /O2 /D "NDEBUG" /D "_WINDOWS" /D "WIN32" $(XMSTATICDEF) /Fp"$(INTDIR)\nedit.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /c 
+CPP_PROJ=/nologo /ML /W3 /EHsc /O2 /D "NDEBUG" /D "_WINDOWS" /D "WIN32" /D "_CRT_SECURE_NO_WARNINGS" $(XMSTATICDEF) /Fp"$(INTDIR)\nedit.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /c 
 MTL_PROJ=/nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32 
 BSC32=bscmake.exe
 BSC32_FLAGS=/nologo /o"$(OUTDIR)\nedit.bsc" 
@@ -180,7 +180,7 @@ CLEAN :
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
 
-CPP_PROJ=/nologo /MD /W3 /GX /ZI /Od /I ".." /I "$(MOTIF)\include" /I "$(XDK)\include" /D "_DEBUG" /D "_WINDOWS" /D "WIN32" $(XMSTATICDEF) /Fp"$(INTDIR)\nedit.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /c 
+CPP_PROJ=/nologo /MD /W3 /EHsc /ZI /Od /I ".." /I "$(MOTIF)\include" /I "$(XDK)\include" /D "_DEBUG" /D "_WINDOWS" /D "WIN32" /D "_CRT_SECURE_NO_WARNINGS" $(XMSTATICDEF) /Fp"$(INTDIR)\nedit.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /c 
 MTL_PROJ=/nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32 
 BSC32=bscmake.exe
 BSC32_FLAGS=/nologo /o"$(OUTDIR)\nedit.bsc" 

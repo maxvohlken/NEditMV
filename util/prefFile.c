@@ -325,9 +325,9 @@ static int stringToPref(char *string, PrefDescripRec *rsrcDescrip)
       	*(int *)rsrcDescrip->valueAddr = 0;
     	return False;
       case PREF_STRING:
-	if (strlen(string) >= (int)rsrcDescrip->arg)
+	if (strlen(string) >= (size_t)rsrcDescrip->arg)
       	    return False;
-	strncpy(rsrcDescrip->valueAddr, string, (int)rsrcDescrip->arg);
+	strncpy(rsrcDescrip->valueAddr, string, (size_t)rsrcDescrip->arg);
       	return True;
       case PREF_ALLOC_STRING:
       	*(char **)rsrcDescrip->valueAddr = XtMalloc(strlen(string) + 1);

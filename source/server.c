@@ -351,7 +351,7 @@ static void processServerCommandString(char *string)
 	/* See if the iconic resource is set. If it is not then force the
 	** window to the top. */
 	{Boolean iconic;
-	XtVaGetValues(window->shell, XmNiconic, &iconic, 0);
+	XtVaGetValues(window->shell, XmNiconic, &iconic, NULL);
 	if(!iconic) {
     	RaiseShellWindow(window->shell);
 	}

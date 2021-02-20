@@ -5,8 +5,8 @@ AC_CANONICAL_SYSTEM
 
 PACKAGE=NEditMV
 VERSION='5.0.1'
-VERSION_DATE='April 13, 2012'
-MV_PATCH=15
+VERSION_DATE='March 8, 2019'
+MV_PATCH=17
 MV_PATCH_DATE=`echo esyscmd([date '+%B %d, %Y'])`
 
 # We require x and motif.

@@ -878,7 +878,7 @@ static Widget createHighlightStylesMenu(Widget parent)
     for (i=0; i<NHighlightStyles; i++) {
         XtVaCreateManagedWidget("highlightStyles", xmPushButtonWidgetClass,menu,
     	      XmNlabelString, s1=XmStringCreateSimple(HighlightStyles[i]->name),
-    	      XmNuserData, (void *)HighlightStyles[i]->name, 0);
+    	      XmNuserData, (void *)HighlightStyles[i]->name, NULL);
         XmStringFree(s1);
     }
     return menu;
@@ -1202,7 +1202,7 @@ void EditHighlightStyles(Widget parent, char *initialStyle)
     AddSmallIcon(HSDialog.shell);
     form = XtVaCreateManagedWidget("editHighlightStyles", xmFormWidgetClass,
 	    HSDialog.shell, XmNautoUnmanage, False,
-	    XmNresizePolicy, XmRESIZE_NONE, 0);
+	    XmNresizePolicy, XmRESIZE_NONE, NULL);
     XtAddCallback(form, XmNdestroyCallback, hsDestroyCB, NULL);
     AddMotifCloseCallback(HSDialog.shell, hsDismissCB, NULL);
         
@@ -1216,7 +1216,7 @@ from the list on the left.  Select \"New\" to add a new style to the list."),
 	    XmNleftAttachment, XmATTACH_POSITION,
 	    XmNleftPosition, HS_LEFT_MARGIN_POS,
 	    XmNrightAttachment, XmATTACH_POSITION,
-	    XmNrightPosition, HS_RIGHT_MARGIN_POS, 0);
+	    XmNrightPosition, HS_RIGHT_MARGIN_POS, NULL);
     XmStringFree(s1);
     
     nameLbl = XtVaCreateManagedWidget("nameLbl", xmLabelGadgetClass, form,
@@ -1227,7 +1227,7 @@ from the list on the left.  Select \"New\" to add a new style to the list."),
     	    XmNleftPosition, HS_LIST_RIGHT,
 	    XmNtopAttachment, XmATTACH_WIDGET,
 	    XmNtopOffset, HS_H_MARGIN,
-	    XmNtopWidget, topLbl, 0);
+	    XmNtopWidget, topLbl, NULL);
     XmStringFree(s1);
  
     HSDialog.nameW = XtVaCreateManagedWidget("name", xmTextWidgetClass, form,
@@ -1236,9 +1236,9 @@ from the list on the left.  Select \"New\" to add a new style to the list."),
 	    XmNtopAttachment, XmATTACH_WIDGET,
 	    XmNtopWidget, nameLbl,
 	    XmNrightAttachment, XmATTACH_POSITION,
-	    XmNrightPosition, HS_RIGHT_MARGIN_POS, 0);
+	    XmNrightPosition, HS_RIGHT_MARGIN_POS, NULL);
     RemapDeleteKey(HSDialog.nameW);
-    XtVaSetValues(nameLbl, XmNuserData, HSDialog.nameW, 0);
+    XtVaSetValues(nameLbl, XmNuserData, HSDialog.nameW, NULL);
     
     colorLbl = XtVaCreateManagedWidget("colorLbl", xmLabelGadgetClass, form,
     	    XmNlabelString, s1=XmStringCreateSimple("Color"),
@@ -1248,7 +1248,7 @@ from the list on the left.  Select \"New\" to add a new style to the list."),
     	    XmNleftPosition, HS_LIST_RIGHT,
 	    XmNtopAttachment, XmATTACH_WIDGET,
 	    XmNtopOffset, HS_H_MARGIN,
-	    XmNtopWidget, HSDialog.nameW, 0);
+	    XmNtopWidget, HSDialog.nameW, NULL);
     XmStringFree(s1);
  
     HSDialog.colorW = XtVaCreateManagedWidget("color", xmTextWidgetClass, form,
@@ -1257,9 +1257,9 @@ from the list on the left.  Select \"New\" to add a new style to the list."),
 	    XmNtopAttachment, XmATTACH_WIDGET,
 	    XmNtopWidget, colorLbl,
 	    XmNrightAttachment, XmATTACH_POSITION,
-	    XmNrightPosition, HS_RIGHT_MARGIN_POS, 0);
+	    XmNrightPosition, HS_RIGHT_MARGIN_POS, NULL);
     RemapDeleteKey(HSDialog.colorW);
-    XtVaSetValues(colorLbl, XmNuserData, HSDialog.colorW, 0);
+    XtVaSetValues(colorLbl, XmNuserData, HSDialog.colorW, NULL);
     
     fontLbl = XtVaCreateManagedWidget("fontLbl", xmLabelGadgetClass, form,
     	    XmNlabelString, s1=XmStringCreateSimple("Font"),
@@ -1268,7 +1268,7 @@ from the list on the left.  Select \"New\" to add a new style to the list."),
     	    XmNleftPosition, HS_LIST_RIGHT,
 	    XmNtopAttachment, XmATTACH_WIDGET,
 	    XmNtopOffset, HS_H_MARGIN,
-	    XmNtopWidget, HSDialog.colorW, 0);
+	    XmNtopWidget, HSDialog.colorW, NULL);
     XmStringFree(s1);
 
     fontBox = XtVaCreateManagedWidget("fontBox", xmRowColumnWidgetClass, form,
@@ -1278,27 +1278,27 @@ from the list on the left.  Select \"New\" to add a new style to the list."),
 	    XmNleftAttachment, XmATTACH_POSITION,
     	    XmNleftPosition, HS_LIST_RIGHT,
 	    XmNtopAttachment, XmATTACH_WIDGET,
-	    XmNtopWidget, fontLbl, 0);
+	    XmNtopWidget, fontLbl, NULL);
     HSDialog.plainW = XtVaCreateManagedWidget("plain", 
     	    xmToggleButtonWidgetClass, fontBox,
     	    XmNset, True,
     	    XmNlabelString, s1=XmStringCreateSimple("Plain"),
-    	    XmNmnemonic, 'P', 0);
+    	    XmNmnemonic, 'P', NULL);
     XmStringFree(s1);
     HSDialog.boldW = XtVaCreateManagedWidget("bold", 
     	    xmToggleButtonWidgetClass, fontBox,
     	    XmNlabelString, s1=XmStringCreateSimple("Bold"),
-    	    XmNmnemonic, 'B', 0);
+    	    XmNmnemonic, 'B', NULL);
     XmStringFree(s1);
     HSDialog.italicW = XtVaCreateManagedWidget("italic", 
     	    xmToggleButtonWidgetClass, fontBox,
     	    XmNlabelString, s1=XmStringCreateSimple("Italic"),
-    	    XmNmnemonic, 'I', 0);
+    	    XmNmnemonic, 'I', NULL);
     XmStringFree(s1);
     HSDialog.boldItalicW = XtVaCreateManagedWidget("boldItalic", 
     	    xmToggleButtonWidgetClass, fontBox,
     	    XmNlabelString, s1=XmStringCreateSimple("Bold Italic"),
-    	    XmNmnemonic, 'o', 0);
+    	    XmNmnemonic, 'o', NULL);
     XmStringFree(s1);
     	    
     okBtn = XtVaCreateManagedWidget("ok",xmPushButtonWidgetClass,form,
@@ -1308,7 +1308,7 @@ from the list on the left.  Select \"New\" to add a new style to the list."),
     	    XmNrightAttachment, XmATTACH_POSITION,
     	    XmNrightPosition, 30,
     	    XmNbottomAttachment, XmATTACH_POSITION,
-    	    XmNbottomPosition, 99, 0);
+    	    XmNbottomPosition, 99, NULL);
     XtAddCallback(okBtn, XmNactivateCallback, hsOkCB, NULL);
     XmStringFree(s1);
 
@@ -1320,7 +1320,7 @@ from the list on the left.  Select \"New\" to add a new style to the list."),
     	    XmNrightAttachment, XmATTACH_POSITION,
     	    XmNrightPosition, 60,
     	    XmNbottomAttachment, XmATTACH_POSITION,
-    	    XmNbottomPosition, 99, 0);
+    	    XmNbottomPosition, 99, NULL);
     XtAddCallback(applyBtn, XmNactivateCallback, hsApplyCB, NULL);
     XmStringFree(s1);
 
@@ -1331,7 +1331,7 @@ from the list on the left.  Select \"New\" to add a new style to the list."),
     	    XmNrightAttachment, XmATTACH_POSITION,
     	    XmNrightPosition, 90,
     	    XmNbottomAttachment, XmATTACH_POSITION,
-    	    XmNbottomPosition, 99, 0);
+    	    XmNbottomPosition, 99, NULL);
     XtAddCallback(dismissBtn, XmNactivateCallback, hsDismissCB, NULL);
     XmStringFree(s1);
     
@@ -1343,7 +1343,7 @@ from the list on the left.  Select \"New\" to add a new style to the list."),
  	    XmNrightAttachment, XmATTACH_FORM,
 	    XmNbottomAttachment, XmATTACH_WIDGET,
     	    XmNbottomWidget, dismissBtn, 0,
-	    XmNbottomOffset, HS_H_MARGIN, 0);
+	    XmNbottomOffset, HS_H_MARGIN, NULL);
     
     ac = 0;
     XtSetArg(args[ac], XmNtopAttachment, XmATTACH_WIDGET); ac++;
@@ -1360,11 +1360,11 @@ from the list on the left.  Select \"New\" to add a new style to the list."),
     	    (void **)HSDialog.highlightStyleList, &HSDialog.nHighlightStyles,
     	    MAX_HIGHLIGHT_STYLES, 20, hsGetDisplayedCB, NULL, hsSetDisplayedCB,
     	    NULL, hsFreeItemCB);
-    XtVaSetValues(topLbl, XmNuserData, HSDialog.managedListW, 0);
+    XtVaSetValues(topLbl, XmNuserData, HSDialog.managedListW, NULL);
  
     /* Set initial default button */
-    XtVaSetValues(form, XmNdefaultButton, okBtn, 0);
-    XtVaSetValues(form, XmNcancelButton, dismissBtn, 0);
+    XtVaSetValues(form, XmNdefaultButton, okBtn, NULL);
+    XtVaSetValues(form, XmNcancelButton, dismissBtn, NULL);
     
     /* If there's a suggestion for an initial selection, make it */
     if (initialStyle != NULL)
@@ -1701,7 +1701,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     AddSmallIcon(HighlightDialog.shell);
     form = XtVaCreateManagedWidget("editHighlightPatterns", xmFormWidgetClass,
 	    HighlightDialog.shell, XmNautoUnmanage, False,
-	    XmNresizePolicy, XmRESIZE_NONE, 0);
+	    XmNresizePolicy, XmRESIZE_NONE, NULL);
     XtAddCallback(form, XmNdestroyCallback, destroyCB, NULL);
     AddMotifCloseCallback(HighlightDialog.shell, dismissCB, NULL);
 
@@ -1712,7 +1712,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNtopAttachment, XmATTACH_POSITION,
 	    XmNtopPosition, 1,
 	    XmNrightAttachment, XmATTACH_POSITION,
-	    XmNrightPosition, 99, 0);
+	    XmNrightPosition, 99, NULL);
  
     HighlightDialog.lmPulldown = CreateLanguageModeMenu(lmForm, langModeCB,
     	    NULL);
@@ -1736,14 +1736,14 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNrightPosition, 50,
 	    XmNtopAttachment, XmATTACH_FORM,
 	    XmNbottomAttachment, XmATTACH_OPPOSITE_WIDGET,
-	    XmNbottomWidget, lmOptMenu, 0);
+	    XmNbottomWidget, lmOptMenu, NULL);
     XmStringFree(s1);
     
     lmBtn = XtVaCreateManagedWidget("lmBtn", xmPushButtonWidgetClass, lmForm,
     	    XmNlabelString, s1=MKSTRING("Add / Modify\nLanguage Mode..."),
     	    XmNmnemonic, 'A',
     	    XmNrightAttachment, XmATTACH_FORM,
-    	    XmNtopAttachment, XmATTACH_FORM, 0);
+    	    XmNtopAttachment, XmATTACH_FORM, NULL);
     XtAddCallback(lmBtn, XmNactivateCallback, lmDialogCB, NULL);
     XmStringFree(s1);
     
@@ -1754,7 +1754,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNrightAttachment, XmATTACH_POSITION,
     	    XmNrightPosition, 13,
     	    XmNbottomAttachment, XmATTACH_FORM,
-    	    XmNbottomOffset, BORDER, 0);
+    	    XmNbottomOffset, BORDER, NULL);
     XtAddCallback(okBtn, XmNactivateCallback, okCB, NULL);
     XmStringFree(s1);
     
@@ -1766,7 +1766,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNrightAttachment, XmATTACH_POSITION,
     	    XmNrightPosition, 26,
     	    XmNbottomAttachment, XmATTACH_FORM,
-    	    XmNbottomOffset, BORDER, 0);
+    	    XmNbottomOffset, BORDER, NULL);
     XtAddCallback(applyBtn, XmNactivateCallback, applyCB, NULL);
     XmStringFree(s1);
     
@@ -1778,7 +1778,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNrightAttachment, XmATTACH_POSITION,
     	    XmNrightPosition, 39,
     	    XmNbottomAttachment, XmATTACH_FORM,
-    	    XmNbottomOffset, BORDER, 0);
+    	    XmNbottomOffset, BORDER, NULL);
     XtAddCallback(checkBtn, XmNactivateCallback, checkCB, NULL);
     XmStringFree(s1);
     
@@ -1790,7 +1790,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNrightAttachment, XmATTACH_POSITION,
     	    XmNrightPosition, 52,
     	    XmNbottomAttachment, XmATTACH_FORM,
-    	    XmNbottomOffset, BORDER, 0);
+    	    XmNbottomOffset, BORDER, NULL);
     XtAddCallback(deleteBtn, XmNactivateCallback, deleteCB, NULL);
     XmStringFree(s1);
     
@@ -1802,7 +1802,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNrightAttachment, XmATTACH_POSITION,
     	    XmNrightPosition, 73,
     	    XmNbottomAttachment, XmATTACH_FORM,
-    	    XmNbottomOffset, BORDER, 0);
+    	    XmNbottomOffset, BORDER, NULL);
     XtAddCallback(restoreBtn, XmNactivateCallback, restoreCB, NULL);
     XmStringFree(s1);
     
@@ -1814,7 +1814,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNrightAttachment, XmATTACH_POSITION,
     	    XmNrightPosition, 86,
     	    XmNbottomAttachment, XmATTACH_FORM,
-    	    XmNbottomOffset, BORDER, 0);
+    	    XmNbottomOffset, BORDER, NULL);
     XtAddCallback(dismissBtn, XmNactivateCallback, dismissCB, NULL);
     XmStringFree(s1);
     
@@ -1827,7 +1827,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNrightAttachment, XmATTACH_POSITION,
     	    XmNrightPosition, 99,
     	    XmNbottomAttachment, XmATTACH_FORM,
-    	    XmNbottomOffset, BORDER, 0);
+    	    XmNbottomOffset, BORDER, NULL);
     XtAddCallback(helpBtn, XmNactivateCallback, helpCB, NULL);
     XmStringFree(s1);
     
@@ -1839,15 +1839,15 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNrightPosition, 99,
 	    XmNbottomAttachment, XmATTACH_WIDGET,
     	    XmNbottomWidget, okBtn,
-    	    XmNbottomOffset, BORDER, 0);
+    	    XmNbottomOffset, BORDER, NULL);
     contextForm = XtVaCreateManagedWidget("contextForm", xmFormWidgetClass,
-	    contextFrame, 0);
+	    contextFrame, NULL);
 #if XmVersion >= 1002
     contextLbl = XtVaCreateManagedWidget("contextLbl",
     	    xmLabelGadgetClass, contextFrame,
     	    XmNlabelString, s1=XmStringCreateSimple(
     	      "Context requirements for incremental re-parsing after changes"),
-	    XmNchildType, XmFRAME_TITLE_CHILD, 0);
+	    XmNchildType, XmFRAME_TITLE_CHILD, NULL);
     XmStringFree(s1);
 #endif
     
@@ -1858,7 +1858,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNleftAttachment, XmATTACH_POSITION,
 	    XmNleftPosition, 15,
 	    XmNrightAttachment, XmATTACH_POSITION,
-	    XmNrightPosition, 25, 0);
+	    XmNrightPosition, 25, NULL);
     RemapDeleteKey(HighlightDialog.lineContextW);
     
     XtVaCreateManagedWidget("lineContLbl",
@@ -1872,7 +1872,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNtopAttachment, XmATTACH_OPPOSITE_WIDGET,
 	    XmNtopWidget, HighlightDialog.lineContextW,
 	    XmNbottomAttachment, XmATTACH_OPPOSITE_WIDGET,
-    	    XmNbottomWidget, HighlightDialog.lineContextW, 0);
+    	    XmNbottomWidget, HighlightDialog.lineContextW, NULL);
     XmStringFree(s1);
 
     HighlightDialog.charContextW = XtVaCreateManagedWidget("charContext",
@@ -1882,7 +1882,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNleftAttachment, XmATTACH_POSITION,
 	    XmNleftPosition, 58,
 	    XmNrightAttachment, XmATTACH_POSITION,
-	    XmNrightPosition, 68, 0);
+	    XmNrightPosition, 68, NULL);
     RemapDeleteKey(HighlightDialog.lineContextW);
     
     XtVaCreateManagedWidget("charContLbl",
@@ -1896,7 +1896,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNtopAttachment, XmATTACH_OPPOSITE_WIDGET,
 	    XmNtopWidget, HighlightDialog.charContextW,
 	    XmNbottomAttachment, XmATTACH_OPPOSITE_WIDGET,
-    	    XmNbottomWidget, HighlightDialog.charContextW, 0);
+    	    XmNbottomWidget, HighlightDialog.charContextW, NULL);
     XmStringFree(s1);
     
     patternsFrame = XtVaCreateManagedWidget("patternsFrame", xmFrameWidgetClass,
@@ -1909,16 +1909,16 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNrightPosition, 99,
 	    XmNbottomAttachment, XmATTACH_WIDGET,
     	    XmNbottomWidget, contextFrame,
-    	    XmNbottomOffset, BORDER, 0);
+    	    XmNbottomOffset, BORDER, NULL);
     patternsForm = XtVaCreateManagedWidget("patternsForm", xmFormWidgetClass,
-	    patternsFrame, 0);
+	    patternsFrame, NULL);
 #if XmVersion >= 1002
     patternsLbl = XtVaCreateManagedWidget("patternsLbl", xmLabelGadgetClass,
     	    patternsFrame,
     	    XmNlabelString, s1=XmStringCreateSimple("Patterns"),
     	    XmNmnemonic, 'P',
     	    XmNmarginHeight, 0,
-	    XmNchildType, XmFRAME_TITLE_CHILD, 0);
+	    XmNchildType, XmFRAME_TITLE_CHILD, NULL);
     XmStringFree(s1);
 #endif
     
@@ -1929,7 +1929,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNalignment, XmALIGNMENT_BEGINNING,
 	    XmNleftAttachment, XmATTACH_POSITION,
     	    XmNleftPosition, LIST_RIGHT,
-	    XmNtopAttachment, XmATTACH_FORM, 0);
+	    XmNtopAttachment, XmATTACH_FORM, NULL);
     XmStringFree(s1);
 
     typeBox = XtVaCreateManagedWidget("typeBox", xmRowColumnWidgetClass,
@@ -1939,14 +1939,14 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNleftAttachment, XmATTACH_POSITION,
     	    XmNleftPosition, LIST_RIGHT,
 	    XmNtopAttachment, XmATTACH_WIDGET,
-	    XmNtopWidget, typeLbl, 0);
+	    XmNtopWidget, typeLbl, NULL);
     HighlightDialog.topLevelW = XtVaCreateManagedWidget("top", 
     	    xmToggleButtonWidgetClass, typeBox,
     	    XmNset, True,
     	    XmNmarginHeight, 0,
     	    XmNlabelString, s1=XmStringCreateSimple(
     	        "Pass-1 (applied to all text when loaded or modified)"),
-    	    XmNmnemonic, '1', 0);
+    	    XmNmnemonic, '1', NULL);
     XmStringFree(s1);
     XtAddCallback(HighlightDialog.topLevelW, XmNvalueChangedCallback,
     	    patTypeCB, NULL);
@@ -1955,7 +1955,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNmarginHeight, 0,
     	    XmNlabelString, s1=XmStringCreateSimple(
     	        "Pass-2 (parsing is deferred until text is exposed)"),
-    	    XmNmnemonic, '2', 0);
+    	    XmNmnemonic, '2', NULL);
     XmStringFree(s1);
     XtAddCallback(HighlightDialog.deferredW, XmNvalueChangedCallback,
     	    patTypeCB, NULL);
@@ -1964,7 +1964,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNmarginHeight, 0,
     	    XmNlabelString, s1=XmStringCreateSimple(
     	    	"Sub-pattern (processed within start & end of parent)"),
-    	    XmNmnemonic, 'u', 0);
+    	    XmNmnemonic, 'u', NULL);
     XmStringFree(s1);
     XtAddCallback(HighlightDialog.subPatW, XmNvalueChangedCallback,
     	    patTypeCB, NULL);
@@ -1973,7 +1973,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNmarginHeight, 0,
     	    XmNlabelString, s1=XmStringCreateSimple(
     	    	"Coloring for sub-expressions of parent pattern"),
-    	    XmNmnemonic, 'g', 0);
+    	    XmNmnemonic, 'g', NULL);
     XmStringFree(s1);
     XtAddCallback(HighlightDialog.colorPatW, XmNvalueChangedCallback,
     	    patTypeCB, NULL);
@@ -1987,7 +1987,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNleftPosition, LIST_RIGHT,
 	    XmNtopAttachment, XmATTACH_WIDGET,
 	    XmNtopOffset, BORDER,
-	    XmNtopWidget, typeBox, 0);
+	    XmNtopWidget, typeBox, NULL);
     XmStringFree(s1);
 
     matchBox = XtVaCreateManagedWidget("matchBox", xmRowColumnWidgetClass,
@@ -1997,14 +1997,14 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNleftAttachment, XmATTACH_POSITION,
     	    XmNleftPosition, LIST_RIGHT,
 	    XmNtopAttachment, XmATTACH_WIDGET,
-	    XmNtopWidget, HighlightDialog.matchLbl, 0);
+	    XmNtopWidget, HighlightDialog.matchLbl, NULL);
     HighlightDialog.simpleW = XtVaCreateManagedWidget("simple", 
     	    xmToggleButtonWidgetClass, matchBox,
     	    XmNset, True,
     	    XmNmarginHeight, 0,
     	    XmNlabelString, s1=XmStringCreateSimple(
     	    	"Highlight text matching regular expression"),
-    	    XmNmnemonic, 'x', 0);
+    	    XmNmnemonic, 'x', NULL);
     XmStringFree(s1);
     XtAddCallback(HighlightDialog.simpleW, XmNvalueChangedCallback,
     	    matchTypeCB, NULL);
@@ -2013,7 +2013,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNmarginHeight, 0,
     	    XmNlabelString, s1=XmStringCreateSimple(
     	    	"Highlight text between starting and ending REs"),
-    	    XmNmnemonic, 'b', 0);
+    	    XmNmnemonic, 'b', NULL);
     XmStringFree(s1);
     XtAddCallback(HighlightDialog.rangeW, XmNvalueChangedCallback,
     	    matchTypeCB, NULL);
@@ -2028,7 +2028,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNleftPosition, LIST_RIGHT,
 	    XmNtopAttachment, XmATTACH_WIDGET,
 	    XmNtopWidget, matchBox,
-	    XmNtopOffset, BORDER, 0);
+	    XmNtopOffset, BORDER, NULL);
     XmStringFree(s1);
  
     HighlightDialog.nameW = XtVaCreateManagedWidget("name", xmTextWidgetClass,
@@ -2038,9 +2038,9 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNtopAttachment, XmATTACH_WIDGET,
 	    XmNtopWidget, nameLbl,
 	    XmNrightAttachment, XmATTACH_POSITION,
-	    XmNrightPosition, (99 + LIST_RIGHT)/2, 0);
+	    XmNrightPosition, (99 + LIST_RIGHT)/2, NULL);
     RemapDeleteKey(HighlightDialog.nameW);
-    XtVaSetValues(nameLbl, XmNuserData, HighlightDialog.nameW, 0);
+    XtVaSetValues(nameLbl, XmNuserData, HighlightDialog.nameW, NULL);
 
     HighlightDialog.parentLbl = XtVaCreateManagedWidget("parentLbl",
     	    xmLabelGadgetClass, patternsForm,
@@ -2052,7 +2052,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    XmNleftPosition, (99 + LIST_RIGHT)/2 + 1,
 	    XmNtopAttachment, XmATTACH_WIDGET,
 	    XmNtopWidget, matchBox,
-	    XmNtopOffset, BORDER, 0);
+	    XmNtopOffset, BORDER, NULL);
     XmStringFree(s1);
  
     HighlightDialog.parentW = XtVaCreateManagedWidget("parent",
@@ -2062,10 +2062,10 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNtopAttachment, XmATTACH_WIDGET,
 	    XmNtopWidget, HighlightDialog.parentLbl,
 	    XmNrightAttachment, XmATTACH_POSITION,
-	    XmNrightPosition, 99, 0);
+	    XmNrightPosition, 99, NULL);
     RemapDeleteKey(HighlightDialog.parentW);
     XtVaSetValues(HighlightDialog.parentLbl, XmNuserData,
-    	    HighlightDialog.parentW, 0);
+    	    HighlightDialog.parentW, NULL);
 
     HighlightDialog.startLbl = XtVaCreateManagedWidget("startLbl",
     	    xmLabelGadgetClass, patternsForm,
@@ -2075,7 +2075,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNtopWidget, HighlightDialog.parentW,
 	    XmNtopOffset, BORDER,
 	    XmNleftAttachment, XmATTACH_POSITION,
-    	    XmNleftPosition, 1, 0);
+    	    XmNleftPosition, 1, NULL);
  
     HighlightDialog.errorW = XtVaCreateManagedWidget("error",
     	    xmTextWidgetClass, patternsForm,
@@ -2084,7 +2084,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNrightAttachment, XmATTACH_POSITION,
 	    XmNrightPosition, 99,
 	    XmNbottomAttachment, XmATTACH_POSITION,
-	    XmNbottomPosition, 99, 0);
+	    XmNbottomPosition, 99, NULL);
     RemapDeleteKey(HighlightDialog.errorW);
 
     HighlightDialog.errorLbl = XtVaCreateManagedWidget("errorLbl",
@@ -2097,7 +2097,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNleftAttachment, XmATTACH_POSITION,
     	    XmNleftPosition, 1,
 	    XmNbottomAttachment, XmATTACH_WIDGET,
-	    XmNbottomWidget, HighlightDialog.errorW, 0);
+	    XmNbottomWidget, HighlightDialog.errorW, NULL);
     XmStringFree(s1);
  
     HighlightDialog.endW = XtVaCreateManagedWidget("end",
@@ -2108,7 +2108,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNbottomWidget, HighlightDialog.errorLbl,
 	    XmNbottomOffset, BORDER,
 	    XmNrightAttachment, XmATTACH_POSITION,
-	    XmNrightPosition, 99, 0);
+	    XmNrightPosition, 99, NULL);
     RemapDeleteKey(HighlightDialog.endW);
 
     HighlightDialog.endLbl = XtVaCreateManagedWidget("endLbl",
@@ -2119,7 +2119,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNleftAttachment, XmATTACH_POSITION,
     	    XmNleftPosition, 1,
 	    XmNbottomAttachment, XmATTACH_WIDGET,
-	    XmNbottomWidget, HighlightDialog.endW, 0);
+	    XmNbottomWidget, HighlightDialog.endW, NULL);
 
     n = 0;
     XtSetArg(args[n], XmNeditMode, XmMULTI_LINE_EDIT); n++;
@@ -2140,7 +2140,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     MakeSingleLineTextW(HighlightDialog.startW);
     RemapDeleteKey(HighlightDialog.startW);
     XtVaSetValues(HighlightDialog.startLbl,
-    		XmNuserData,HighlightDialog.startW, 0);
+    		XmNuserData,HighlightDialog.startW, NULL);
 
     styleBtn = XtVaCreateManagedWidget("styleLbl", xmPushButtonWidgetClass,
     	    patternsForm,
@@ -2149,7 +2149,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNrightAttachment, XmATTACH_POSITION,
     	    XmNrightPosition, LIST_RIGHT-1,
 	    XmNbottomAttachment, XmATTACH_OPPOSITE_WIDGET,
-	    XmNbottomWidget, HighlightDialog.parentW, 0);
+	    XmNbottomWidget, HighlightDialog.parentW, NULL);
     XmStringFree(s1);
     XtAddCallback(styleBtn, XmNactivateCallback, styleDialogCB, NULL);
 
@@ -2177,7 +2177,7 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
 	    XmNleftAttachment, XmATTACH_POSITION,
     	    XmNleftPosition, 1,
 	    XmNbottomAttachment, XmATTACH_WIDGET,
-	    XmNbottomWidget, HighlightDialog.styleOptMenu, 0);
+	    XmNbottomWidget, HighlightDialog.styleOptMenu, NULL);
     XmStringFree(s1);
 
     n = 0;
@@ -2193,11 +2193,11 @@ for syntax highlighting\nAdd language modes under Preferenses->Language Modes",
     	    n, (void **)HighlightDialog.patterns, &HighlightDialog.nPatterns,
     	    MAX_PATTERNS, 18, getDisplayedCB, NULL, setDisplayedCB,
     	    NULL, freeItemCB);
-    XtVaSetValues(patternsLbl, XmNuserData, HighlightDialog.managedListW, 0);
+    XtVaSetValues(patternsLbl, XmNuserData, HighlightDialog.managedListW, NULL);
 
     /* Set initial default button */
-    XtVaSetValues(form, XmNdefaultButton, okBtn, 0);
-    XtVaSetValues(form, XmNcancelButton, dismissBtn, 0);
+    XtVaSetValues(form, XmNdefaultButton, okBtn, NULL);
+    XtVaSetValues(form, XmNcancelButton, dismissBtn, NULL);
     
     /* Handle mnemonic selection of buttons and focus to dialog */
     AddDialogMnemonicHandler(form);
@@ -2230,7 +2230,7 @@ static void updateHighlightStyleMenu(void)
     HighlightDialog.stylePulldown = createHighlightStylesMenu(
     	    XtParent(XtParent(oldMenu)));
     XtVaSetValues(XmOptionButtonGadget(HighlightDialog.styleOptMenu),
-    	    XmNsubMenuId, HighlightDialog.stylePulldown, 0);
+    	    XmNsubMenuId, HighlightDialog.stylePulldown, NULL);
     patIndex = ManagedListSelectedIndex(HighlightDialog.managedListW);
     if (patIndex == -1)
     	setStyleMenu("Plain");
@@ -2255,7 +2255,7 @@ void UpdateLanguageModeMenu(void)
     HighlightDialog.lmPulldown = CreateLanguageModeMenu(
     	    XtParent(XtParent(oldMenu)), langModeCB, NULL);
     XtVaSetValues(XmOptionButtonGadget(HighlightDialog.lmOptMenu),
-    	    XmNsubMenuId, HighlightDialog.lmPulldown, 0);
+    	    XmNsubMenuId, HighlightDialog.lmPulldown, NULL);
     SetLangModeMenu(HighlightDialog.lmOptMenu, HighlightDialog.langModeName);
 
     XtDestroyWidget(oldMenu);
@@ -2279,7 +2279,7 @@ static void langModeCB(Widget w, XtPointer clientData, XtPointer callData)
     int i, resp;
     
     /* Get the newly selected mode name.  If it's the same, do nothing */
-    XtVaGetValues(w, XmNuserData, &modeName, 0);
+    XtVaGetValues(w, XmNuserData, &modeName, NULL);
     if (!strcmp(modeName, HighlightDialog.langModeName))
     	return;
     
@@ -2348,8 +2348,8 @@ static void styleDialogCB(Widget w, XtPointer clientData, XtPointer callData)
     Widget selectedItem;
     char *style;
     
-    XtVaGetValues(HighlightDialog.styleOptMenu, XmNmenuHistory,&selectedItem,0);
-    XtVaGetValues(selectedItem, XmNuserData, &style, 0);
+    XtVaGetValues(HighlightDialog.styleOptMenu, XmNmenuHistory,&selectedItem,NULL);
+    XtVaGetValues(selectedItem, XmNuserData, &style, NULL);
     EditHighlightStyles(HighlightDialog.shell, style);
 }
 
@@ -2622,10 +2622,10 @@ Regular Expression";
     XtSetSensitive(HighlightDialog.rangeW, matchSense);
     XtSetSensitive(HighlightDialog.matchLbl, matchSense);
     XtVaSetValues(HighlightDialog.startLbl, XmNlabelString,
-    	    s1=XmStringCreateSimple(startLbl), 0);
+    	    s1=XmStringCreateSimple(startLbl), NULL);
     XmStringFree(s1);
     XtVaSetValues(HighlightDialog.endLbl, XmNlabelString,
-    	    s1=XmStringCreateSimple(endLbl), 0);
+    	    s1=XmStringCreateSimple(endLbl), NULL);
     XmStringFree(s1);
 }
 
@@ -2642,18 +2642,18 @@ static void setStyleMenu(char *styleName)
     char *itemStyle;
 
     XtVaGetValues(HighlightDialog.stylePulldown, XmNchildren, &items,
-    	    XmNnumChildren, &nItems, 0);
+    	    XmNnumChildren, &nItems, NULL);
     if (nItems == 0)
     	return;
     selectedItem = items[0];
     for (i=0; i<nItems; i++) {
-    	XtVaGetValues(items[i], XmNuserData, &itemStyle, 0);
+    	XtVaGetValues(items[i], XmNuserData, &itemStyle, NULL);
     	if (!strcmp(itemStyle, styleName)) {
     	    selectedItem = items[i];
     	    break;
     	}
     }
-    XtVaSetValues(HighlightDialog.styleOptMenu, XmNmenuHistory, selectedItem,0);
+    XtVaSetValues(HighlightDialog.styleOptMenu, XmNmenuHistory, selectedItem,NULL);
 }
 
 /*
@@ -2752,8 +2752,8 @@ Expressions and Help -> Syntax Highlighting for more information", "Dismiss");
     }
     
     /* read the styles option menu */
-    XtVaGetValues(HighlightDialog.styleOptMenu, XmNmenuHistory,&selectedItem,0);
-    XtVaGetValues(selectedItem, XmNuserData, &style, 0);
+    XtVaGetValues(HighlightDialog.styleOptMenu, XmNmenuHistory,&selectedItem,NULL);
+    XtVaGetValues(selectedItem, XmNuserData, &style, NULL);
     pat->style = XtMalloc(strlen(style) + 1);
     strcpy(pat->style, style);
     

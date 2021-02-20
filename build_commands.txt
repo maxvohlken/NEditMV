@@ -1,0 +1,7 @@
+# linux_x86 32bit
+ct co -nc source/help.c source/parse.c
+CFLAGS=-m32 LDFLAGS=-m32 ./configure --with-motif=/usr && make clean all
+
+# linux_x86 64bit
+ct co -nc source/help.c source/parse.c
+./configure && make clean all

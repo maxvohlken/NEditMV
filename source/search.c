@@ -175,7 +175,7 @@ void DoFindReplaceDlog(WindowInfo *window, int direction, FindReplaceDlogDefault
 	/* Update the String to find field */
    	XmTextSetString(window->replaceText, primary_selection);
 
-    XtVaGetValues(window->findBtn, XmNuserData, &oldDefaultButton, 0);
+    XtVaGetValues(window->findBtn, XmNuserData, &oldDefaultButton, NULL);
 
     /* Use the userData field of the find button to keep track of the
        current default button */
@@ -294,9 +294,9 @@ static void createReplaceDlog(Widget parent, WindowInfo *window)
     argcnt = 0;
     XtSetArg(args[argcnt], XmNautoUnmanage, False); argcnt++;
     form = XmCreateFormDialog(parent, "replaceDialog", args, argcnt);
-    XtVaSetValues(form, XmNshadowThickness, 0, 0);
+    XtVaSetValues(form, XmNshadowThickness, 0, NULL);
    	sprintf(title, PACKAGE " - Find/Replace (%s)", window->editorInfo->filename);
-   	XtVaSetValues(XtParent(form), XmNtitle, title, 0);
+   	XtVaSetValues(XtParent(form), XmNtitle, title, NULL);
 
     argcnt = 0;
     XtSetArg(args[argcnt], XmNtopAttachment, XmATTACH_FORM); argcnt++;
@@ -345,7 +345,7 @@ static void createReplaceDlog(Widget parent, WindowInfo *window)
     RemapDeleteKey(findText);
     XtManageChild(findText);
     XmAddTabGroup(findText);
-    XtVaSetValues(label1, XmNuserData, findText, 0); /* mnemonic processing */
+    XtVaSetValues(label1, XmNuserData, findText, NULL); /* mnemonic processing */
  
     argcnt = 0;
     XtSetArg(args[argcnt], XmNtopAttachment, XmATTACH_WIDGET); argcnt++;
@@ -380,7 +380,7 @@ static void createReplaceDlog(Widget parent, WindowInfo *window)
     RemapDeleteKey(replaceText);
     XtManageChild(replaceText);
     XmAddTabGroup(replaceText);
-    XtVaSetValues(label, XmNuserData, replaceText, 0); /* mnemonic processing */
+    XtVaSetValues(label, XmNuserData, replaceText, NULL); /* mnemonic processing */
 
     argcnt = 0;
     XtSetArg(args[argcnt], XmNorientation, XmHORIZONTAL); argcnt++;
@@ -594,7 +594,7 @@ static void createReplaceDlog(Widget parent, WindowInfo *window)
     XtManageChild(cancelBtn);
 
 
-    XtVaSetValues(form, XmNcancelButton, cancelBtn, 0);
+    XtVaSetValues(form, XmNcancelButton, cancelBtn, NULL);
     AddDialogMnemonicHandler(form);
     
     window->replaceDlog = form;
@@ -625,7 +625,7 @@ static void createReplaceDlog(Widget parent, WindowInfo *window)
 static void rFocusCB(Widget w, WindowInfo *window, caddr_t *callData) 
 {
     FindReplaceDlogDefaultButton defaultButton = FIND_REPLACE_NO_BUTTON_DEFAULT;
-    XtVaGetValues(window->findBtn, XmNuserData, &defaultButton, 0);
+    XtVaGetValues(window->findBtn, XmNuserData, &defaultButton, NULL);
     if(defaultButton != FIND_REPLACE_NO_BUTTON_DEFAULT) {
    		Widget new = defaultButton == FIND_REPLACE_FIND_BUTTON_DEFAULT ? window->findBtn : 
 	   	             defaultButton == FIND_REPLACE_REPLACE_BUTTON_DEFAULT ? window->replaceFindBtn :
@@ -640,7 +640,7 @@ static void rKeepCB(Widget w, WindowInfo *window, caddr_t *callData)
     char title[MAXPATHLEN + 14];
 
    	sprintf(title, PACKAGE " - Find/Replace (%s)", window->editorInfo->filename);
-   	XtVaSetValues(XtParent(window->replaceDlog), XmNtitle, title, 0);
+   	XtVaSetValues(XtParent(window->replaceDlog), XmNtitle, title, NULL);
 }
 
 static void replaceCB(Widget w, WindowInfo *window,
@@ -1565,11 +1565,11 @@ int SearchAndReplace(WindowInfo *window, int direction, char *searchString,
 	   string at a pleasing position on the screen (otherwise, the cursor would
 	   be automatically scrolled on screen and MoveSelectionToMiddle would do
 	   nothing) */
-	XtVaSetValues(window->lastFocus, textNautoShowInsertPos, False, 0);
+	XtVaSetValues(window->lastFocus, textNautoShowInsertPos, False, NULL);
 	TextSetCursorPos(window->lastFocus, startPos +
 		((direction == SEARCH_FORWARD) ? replaceLen : 0));
 	MoveSelectionToMiddle(window, window->lastFocus);
-	XtVaSetValues(window->lastFocus, textNautoShowInsertPos, True, 0);
+	XtVaSetValues(window->lastFocus, textNautoShowInsertPos, True, NULL);
 
 	return TRUE;
 }

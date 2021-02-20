@@ -40,8 +40,8 @@ RSC=rc.exe
 # PROP Output_Dir "Release"
 # PROP Intermediate_Dir "Release"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /c
-# ADD CPP /nologo /W3 /GX /O2 /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /D "WIN32" /D "XMSTATIC" /YX /FD /c
+# ADD BASE CPP /nologo /W3 /EHsc /O2 /D "WIN32" /D "_CRT_SECURE_NO_WARNINGS" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /c
+# ADD CPP /nologo /W3 /EHsc /O2 /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /D "WIN32" /D "_CRT_SECURE_NO_WARNINGS" /D "XMSTATIC" /YX /FD /c
 # ADD BASE RSC /l 0x409 /d "NDEBUG"
 # ADD RSC /l 0x409 /d "NDEBUG"
 BSC32=bscmake.exe
@@ -64,8 +64,8 @@ LINK32=link.exe
 # PROP Intermediate_Dir "Debug"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /c
-# ADD CPP /nologo /MD /W3 /Gm /GX /ZI /Od /I ".." /I "..\..\exceed\xdk\include" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "WIN32" /D "XMSTATIC" /FR /YX /FD /c
+# ADD BASE CPP /nologo /W3 /Gm /EHsc /Zi /Od /D "WIN32" /D "_CRT_SECURE_NO_WARNINGS" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /c
+# ADD CPP /nologo /MD /W3 /Gm /EHsc /ZI /Od /I ".." /I "..\..\exceed\xdk\include" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "WIN32" /D "_CRT_SECURE_NO_WARNINGS" /D "XMSTATIC" /FR /YX /FD /c
 # ADD BASE RSC /l 0x409 /d "_DEBUG"
 # ADD RSC /l 0x409 /d "_DEBUG"
 BSC32=bscmake.exe

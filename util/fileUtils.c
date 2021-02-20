@@ -25,6 +25,7 @@
 *									       *
 *******************************************************************************/
 #include <config.h>
+#include <stdio.h>
 #include <string.h>
 #ifdef VAXC
 #define NULL (void *) 0

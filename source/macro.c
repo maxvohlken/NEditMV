@@ -336,7 +336,7 @@ void BeginLearn(WindowInfo *window)
 	XtSetSensitive(win->learnItem, False);
     XtSetSensitive(window->finishLearnItem, True);
     XtVaSetValues(window->cancelMacroItem, XmNlabelString,
-    	    s=XmStringCreateSimple("Cancel Learn"), 0);
+    	    s=XmStringCreateSimple("Cancel Learn"), NULL);
     XmStringFree(s);
     XtSetSensitive(window->cancelMacroItem, True);
     
@@ -664,7 +664,7 @@ static void runMacro(WindowInfo *window, Program *prog)
     
     /* enable the cancel menu item */
     XtVaSetValues(window->cancelMacroItem, XmNlabelString,
-    	    s=XmStringCreateSimple("Cancel Macro"), 0);
+    	    s=XmStringCreateSimple("Cancel Macro"), NULL);
     XmStringFree(s);
     XtSetSensitive(window->cancelMacroItem, True);
 
@@ -810,7 +810,7 @@ static void finishMacroCmdExecution(WindowInfo *window)
     /* Clean up waiting-for-macro-command-to-complete mode */
     EndWait(window->shell);
     XtVaSetValues(window->cancelMacroItem, XmNlabelString,
-    	    s=XmStringCreateSimple("Cancel Learn"), 0);
+    	    s=XmStringCreateSimple("Cancel Learn"), NULL);
     XmStringFree(s);
     XtSetSensitive(window->cancelMacroItem, False);
     if (cmdData->bannerIsUp)
@@ -940,20 +940,20 @@ void RepeatDialog(WindowInfo *window)
     XtUnmanageChild(XmSelectionBoxGetChild(selBox, XmDIALOG_SELECTION_LABEL));
     XtUnmanageChild(XmSelectionBoxGetChild(selBox, XmDIALOG_HELP_BUTTON));
     XtUnmanageChild(XmSelectionBoxGetChild(selBox, XmDIALOG_APPLY_BUTTON));
-    XtVaSetValues(XtParent(selBox), XmNtitle, "Repeat", 0);
+    XtVaSetValues(XtParent(selBox), XmNtitle, "Repeat", NULL);
     
-    form = XtVaCreateManagedWidget("form", xmFormWidgetClass, selBox, 0);
+    form = XtVaCreateManagedWidget("form", xmFormWidgetClass, selBox, NULL);
 
     radioBox = XtVaCreateManagedWidget("cmdSrc", xmRowColumnWidgetClass, form,
     	    XmNradioBehavior, True,
 	    XmNorientation, XmHORIZONTAL,
 	    XmNpacking, XmPACK_TIGHT,
 	    XmNtopAttachment, XmATTACH_FORM,
-    	    XmNleftAttachment, XmATTACH_FORM, 0);
+    	    XmNleftAttachment, XmATTACH_FORM, NULL);
     rd->lastCmdToggle = XtVaCreateManagedWidget("lastCmdToggle",
     	    xmToggleButtonWidgetClass, radioBox, XmNset, True,
 	    XmNlabelString, s1=XmStringCreateSimple(lastCmdLabel),
-	    XmNmnemonic, 'C', 0);
+	    XmNmnemonic, 'C', NULL);
     XmStringFree(s1);
     XtFree(lastCmdLabel);
     XtVaCreateManagedWidget("learnReplayToggle",
@@ -961,14 +961,14 @@ void RepeatDialog(WindowInfo *window)
 	    XmNlabelString,
 	    	s1=XmStringCreateSimple("Learn/Replay"),
 	    XmNmnemonic, 'L',
-	    XmNsensitive, ReplayMacro != NULL, 0);
+	    XmNsensitive, ReplayMacro != NULL, NULL);
     XmStringFree(s1);
 
     timesForm = XtVaCreateManagedWidget("form", xmFormWidgetClass, form,
 	    XmNtopAttachment, XmATTACH_WIDGET,
     	    XmNtopWidget, radioBox,
 	    XmNtopOffset, 10,
-    	    XmNleftAttachment, XmATTACH_FORM, 0);
+    	    XmNleftAttachment, XmATTACH_FORM, NULL);
     radioBox = XtVaCreateManagedWidget("method", xmRowColumnWidgetClass,
 	    timesForm,
     	    XmNradioBehavior, True,
@@ -976,22 +976,22 @@ void RepeatDialog(WindowInfo *window)
 	    XmNpacking, XmPACK_TIGHT,
 	    XmNtopAttachment, XmATTACH_FORM,
     	    XmNbottomAttachment, XmATTACH_FORM, 
-    	    XmNleftAttachment, XmATTACH_FORM, 0);
+    	    XmNleftAttachment, XmATTACH_FORM, NULL);
     rd->inSelToggle = XtVaCreateManagedWidget("inSelToggle",
     	    xmToggleButtonWidgetClass, radioBox, XmNset, False,
 	    XmNlabelString, s1=XmStringCreateSimple("In Selection"),
-	    XmNmnemonic, 'I', 0);
+	    XmNmnemonic, 'I', NULL);
     XmStringFree(s1);
     rd->toEndToggle = XtVaCreateManagedWidget("toEndToggle",
     	    xmToggleButtonWidgetClass, radioBox, XmNset, False,
 	    XmNlabelString, s1=XmStringCreateSimple("To End"),
-	    XmNmnemonic, 'T', 0);
+	    XmNmnemonic, 'T', NULL);
     XmStringFree(s1);
     XtVaCreateManagedWidget("nTimesToggle",
     	    xmToggleButtonWidgetClass, radioBox, XmNset, True,
 	    XmNlabelString, s1=XmStringCreateSimple("N Times"),
 	    XmNmnemonic, 'N',
-	    XmNset, True, 0);
+	    XmNset, True, NULL);
     XmStringFree(s1);
     rd->repeatText = XtVaCreateManagedWidget("repeatText", xmTextWidgetClass,
 	    timesForm,
@@ -999,7 +999,7 @@ void RepeatDialog(WindowInfo *window)
     	    XmNtopAttachment, XmATTACH_FORM,
 	    XmNbottomAttachment, XmATTACH_FORM,
     	    XmNleftAttachment, XmATTACH_WIDGET,
-    	    XmNleftWidget, radioBox, 0);
+    	    XmNleftWidget, radioBox, NULL);
     RemapDeleteKey(rd->repeatText);
 
     /* Handle mnemonic selection of buttons and focus to dialog */
@@ -1007,8 +1007,8 @@ void RepeatDialog(WindowInfo *window)
 
     /* Set initial focus */
 #if XmVersion >= 1002
-    XtVaSetValues(form, XmNinitialFocus, timesForm, 0);
-    XtVaSetValues(timesForm, XmNinitialFocus, rd->repeatText, 0);
+    XtVaSetValues(form, XmNinitialFocus, timesForm, NULL);
+    XtVaSetValues(timesForm, XmNinitialFocus, rd->repeatText, NULL);
 #endif
     
     /* put up dialog */
@@ -2302,14 +2302,14 @@ static int dialogMS(WindowInfo *window, DataValue *argList, int nArgs,
 
     /* Create the message box dialog widget and its dialog shell parent */
     shell = XtVaCreateWidget("macroDialogShell", xmDialogShellWidgetClass,
-    	    window->shell, XmNtitle, "", 0);
+    	    window->shell, XmNtitle, "", NULL);
     AddMotifCloseCallback(shell, dialogCloseCB, window);
     dialog = XtVaCreateWidget("macroDialog", xmMessageBoxWidgetClass,
     	    shell, XmNmessageString, s1=MKSTRING(message),
-    	    XmNokLabelString, s2=XmStringCreateSimple(btnLabels[0]), 0);
+    	    XmNokLabelString, s2=XmStringCreateSimple(btnLabels[0]), NULL);
     XtAddCallback(dialog, XmNokCallback, dialogBtnCB, window);
     XtVaSetValues(XmMessageBoxGetChild(dialog, XmDIALOG_OK_BUTTON),
-    	    XmNuserData, (XtPointer)1, 0);
+    	    XmNuserData, (XtPointer)1, NULL);
     XmStringFree(s1);
     XmStringFree(s2);
     cmdData->dialog = dialog;
@@ -2322,7 +2322,7 @@ static int dialogMS(WindowInfo *window, DataValue *argList, int nArgs,
     for (i=1; i<nBtns; i++) {
     	btn = XtVaCreateManagedWidget("mdBtn", xmPushButtonWidgetClass, dialog,
     	    	XmNlabelString, s1=XmStringCreateSimple(btnLabels[i]),
-    	    	XmNuserData, (XtPointer)(i+1), 0);
+    	    	XmNuserData, (XtPointer)(i+1), NULL);
     	XtAddCallback(btn, XmNactivateCallback, dialogBtnCB, window);
     	XmStringFree(s1);
     }
@@ -2343,7 +2343,7 @@ static void dialogBtnCB(Widget w, XtPointer clientData, XtPointer callData)
 {
     WindowInfo *window = (WindowInfo *)clientData;
     macroCmdInfo *cmdData = window->macroCmdData;
-    XtPointer userData;
+    XtArgVal userData;
     DataValue retVal;
     
     /* Return the index of the button which was pressed (stored in the userData
@@ -2352,7 +2352,7 @@ static void dialogBtnCB(Widget w, XtPointer clientData, XtPointer callData)
     if (cmdData == NULL)
     	return; /* shouldn't happen */
     if (XtClass(w) == xmPushButtonWidgetClass) {
-	XtVaGetValues(w, XmNuserData, &userData, 0);
+	XtVaGetValues(w, XmNuserData, &userData, NULL);
 	retVal.val.n = (int)userData;
     } else
     	retVal.val.n = 1;
@@ -2420,15 +2420,15 @@ static int stringDialogMS(WindowInfo *window, DataValue *argList, int nArgs,
 
     /* Create the selection box dialog widget and its dialog shell parent */
     shell = XtVaCreateWidget("macroDialogShell", xmDialogShellWidgetClass,
-    	    window->shell, XmNtitle, "", 0);
+    	    window->shell, XmNtitle, "", NULL);
     AddMotifCloseCallback(shell, stringDialogCloseCB, window);
     dialog = XtVaCreateWidget("macroStringDialog", xmSelectionBoxWidgetClass,
     	    shell, XmNselectionLabelString, s1=MKSTRING(message),
     	    XmNokLabelString, s2=XmStringCreateSimple(btnLabels[0]),
-    	    XmNdialogType, XmDIALOG_PROMPT, 0);
+    	    XmNdialogType, XmDIALOG_PROMPT, NULL);
     XtAddCallback(dialog, XmNokCallback, stringDialogBtnCB, window);
     XtVaSetValues(XmSelectionBoxGetChild(dialog, XmDIALOG_OK_BUTTON),
-    	    XmNuserData, (XtPointer)1, 0);
+    	    XmNuserData, (XtPointer)1, NULL);
     XmStringFree(s1);
     XmStringFree(s2);
     cmdData->dialog = dialog;
@@ -2440,11 +2440,11 @@ static int stringDialogMS(WindowInfo *window, DataValue *argList, int nArgs,
     /* Add user specified buttons (1st is already done).  Selection box
        requires a place-holder widget to be added before buttons can be
        added, that's what the separator below is for */
-    XtVaCreateWidget("x", xmSeparatorWidgetClass, dialog, 0);
+    XtVaCreateWidget("x", xmSeparatorWidgetClass, dialog, NULL);
     for (i=1; i<nBtns; i++) {
     	btn = XtVaCreateManagedWidget("mdBtn", xmPushButtonWidgetClass, dialog,
     	    	XmNlabelString, s1=XmStringCreateSimple(btnLabels[i]),
-    	    	XmNuserData, (XtPointer)(i+1), 0);
+    	    	XmNuserData, (XtPointer)(i+1), NULL);
     	XtAddCallback(btn, XmNactivateCallback, stringDialogBtnCB, window);
     	XmStringFree(s1);
     }
@@ -2466,7 +2466,7 @@ static void stringDialogBtnCB(Widget w, XtPointer clientData,
 {
     WindowInfo *window = (WindowInfo *)clientData;
     macroCmdInfo *cmdData = window->macroCmdData;
-    XtPointer userData;
+    XtArgVal userData;
     DataValue retVal;
     char *text;
     int btnNum;
@@ -2488,7 +2488,7 @@ static void stringDialogBtnCB(Widget w, XtPointer clientData,
        field of the button widget).  The 1st button, being a gadget, is not
        returned in w. */
     if (XtClass(w) == xmPushButtonWidgetClass) {
-	XtVaGetValues(w, XmNuserData, &userData, 0);
+	XtVaGetValues(w, XmNuserData, &userData, NULL);
 	btnNum = (int)userData;
     } else
     	btnNum = 1;
@@ -2612,7 +2612,7 @@ static int wrapMarginMV(WindowInfo *window, DataValue *argList, int nArgs,
     int margin, nCols;
     
     XtVaGetValues(window->textArea, textNcolumns, &nCols,
-    	    textNwrapMargin, &margin, 0);
+    	    textNwrapMargin, &margin, NULL);
     result->tag = INT_TAG;
     result->val.n = margin == 0 ? nCols : margin;
     return True;
@@ -2631,7 +2631,7 @@ static int emTabDistMV(WindowInfo *window, DataValue *argList, int nArgs,
 {
     int dist;
     
-    XtVaGetValues(window->textArea, textNemulateTabs, &dist, 0);
+    XtVaGetValues(window->textArea, textNemulateTabs, &dist, NULL);
     result->tag = INT_TAG;
     result->val.n = dist == 0 ? -1 : dist;
     return True;

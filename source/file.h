@@ -34,7 +34,7 @@ int SaveWindow(WindowInfo *window);
 int SaveWindowAs(WindowInfo *window, char *newName, int addWrap);
 int CloseAllFilesAndWindows(void);
 int CloseFileAndWindow(WindowInfo *window);
-void PrintWindow(WindowInfo *window, int selectedOnly);
+void NEditPrintWindow(WindowInfo *window, int selectedOnly);
 void PrintString(char *string, int length, Widget parent, char *jobName);
 int WriteBackupFile(WindowInfo *window);
 int IncludeFile(WindowInfo *window, char *name);

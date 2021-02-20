@@ -857,6 +857,11 @@ void CheckForChangesInFile(WindowInfo *window)
 #if defined(_WIN32) && !defined(WIN32_BINARY_FILE_MODE)
 			/* Adjust the buffer length for the fact that the carriage returns */
 			/* have been removed. So add the number of lines in the file. */
+			/* TODO - This needs to be done conditionally if we detect that the
+			 * file being read contains carriage returns. If a file on Windows 
+			 * doesn't contain carriage returns then this calculation is incorrect
+			 * and we will read from the wrong location in the file.
+			 */
 			file_length += BufCountLines(window->editorInfo->buffer, 0, window->editorInfo->buffer->length);
 #endif
     		/* reload the file if it has gotten smaller */
@@ -1273,7 +1278,7 @@ static int bckError(WindowInfo *window, char *errString, char *file)
     return FALSE;
 }
 
-void PrintWindow(WindowInfo *window, int selectedOnly)
+void NEditPrintWindow(WindowInfo *window, int selectedOnly)
 {
     textBuffer *buf = window->editorInfo->buffer;
     selection *sel = &buf->primary;
@@ -1452,7 +1457,7 @@ int PromptForNewFile(WindowInfo *window, char *prompt, char *fullname,
 	wrapToggle = XtVaCreateManagedWidget("addWrap",
 	    	xmToggleButtonWidgetClass, fileSB, XmNlabelString,
 	    	s1=XmStringCreateSimple("Add line breaks where wrapped"),
-    		XmNmarginHeight, 0, XmNalignment, XmALIGNMENT_BEGINNING, 0);
+    		XmNmarginHeight, 0, XmNalignment, XmALIGNMENT_BEGINNING, NULL);
 	XtAddCallback(wrapToggle, XmNvalueChangedCallback, addWrapCB,
     	    	addWrap);
 	XmStringFree(s1);
@@ -1460,17 +1465,17 @@ int PromptForNewFile(WindowInfo *window, char *prompt, char *fullname,
     *addWrap = False;
     XtVaSetValues(XmFileSelectionBoxGetChild(fileSB,
     	    XmDIALOG_FILTER_LABEL), XmNmnemonic, 'l', XmNuserData,
-    	    XmFileSelectionBoxGetChild(fileSB, XmDIALOG_FILTER_TEXT), 0);
+    	    XmFileSelectionBoxGetChild(fileSB, XmDIALOG_FILTER_TEXT), NULL);
     XtVaSetValues(XmFileSelectionBoxGetChild(fileSB,
     	    XmDIALOG_DIR_LIST_LABEL), XmNmnemonic, 'D', XmNuserData,
-    	    XmFileSelectionBoxGetChild(fileSB, XmDIALOG_DIR_LIST), 0);
+    	    XmFileSelectionBoxGetChild(fileSB, XmDIALOG_DIR_LIST), NULL);
     XtVaSetValues(XmFileSelectionBoxGetChild(fileSB,
     	    XmDIALOG_LIST_LABEL), XmNmnemonic, 'F', XmNuserData,
-    	    XmFileSelectionBoxGetChild(fileSB, XmDIALOG_LIST), 0);
+    	    XmFileSelectionBoxGetChild(fileSB, XmDIALOG_LIST), NULL);
     XtVaSetValues(XmFileSelectionBoxGetChild(fileSB,
     	    XmDIALOG_SELECTION_LABEL), XmNmnemonic,
     	    prompt[strspn(prompt, "lFD")], XmNuserData,
-    	    XmFileSelectionBoxGetChild(fileSB, XmDIALOG_TEXT), 0);
+    	    XmFileSelectionBoxGetChild(fileSB, XmDIALOG_TEXT), NULL);
     AddDialogMnemonicHandler(fileSB);
     RemapDeleteKey(XmFileSelectionBoxGetChild(fileSB, XmDIALOG_FILTER_TEXT));
     RemapDeleteKey(XmFileSelectionBoxGetChild(fileSB, XmDIALOG_TEXT));

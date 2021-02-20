@@ -1417,6 +1417,12 @@ static void finishCmdExecution(WindowInfo *window, int terminatedOnError)
     int resp, cancel = False, fromMacro = cmdData->fromMacro;
     char *outText, *errText = "";
 	int loadAfter = (cmdData->flags & RELOAD_FILE_AFTER);
+	
+	/* Guard against multiple executions */
+	if (cmdData == NULL) {
+		return;
+	}
+	
 #ifdef _WIN32
 	/* Clean up the thread and event handles. */
 	MYCLOSEHANDLE(cmdData->stdinThreadHandle);
@@ -1452,14 +1458,20 @@ static void finishCmdExecution(WindowInfo *window, int terminatedOnError)
 #endif
 
     /* Free the provided input text */
-	if (cmdData->input != NULL)
+	if (cmdData->input != NULL) {
 		XtFree(cmdData->input);
+		cmdData->input = NULL;
+	}
     
     /* Cancel pending timeouts */
-    if (cmdData->flushTimeoutID != 0)
+    if (cmdData->flushTimeoutID != 0) {
     	XtRemoveTimeOut(cmdData->flushTimeoutID);
-    if (cmdData->bannerTimeoutID != 0)
+		cmdData->flushTimeoutID = 0;
+	}
+    if (cmdData->bannerTimeoutID != 0) {
     	XtRemoveTimeOut(cmdData->bannerTimeoutID);
+		cmdData->bannerTimeoutID = 0;
+	}
     
     /* Clean up waiting-for-shell-command-to-complete mode */
     if (!cmdData->fromMacro) {
@@ -2094,7 +2106,7 @@ static Widget createOutputDialog(WindowInfo *window, char *text,
     XtSetArg(al[ac], XmNtopAttachment, XmATTACH_NONE);  ac++;
     button = XmCreatePushButtonGadget(form, "dismiss", al, ac);
     XtManageChild(button);
-    XtVaSetValues(form, XmNdefaultButton, button, 0);
+    XtVaSetValues(form, XmNdefaultButton, button, NULL);
     XmStringFree(st1);
     XtAddCallback(button, XmNactivateCallback, destroyOutDialogCB,
     	    XtParent(form));
@@ -2116,12 +2128,12 @@ static Widget createOutputDialog(WindowInfo *window, char *text,
     	    XmNbottomAttachment, XmATTACH_WIDGET,
     	    XmNrightAttachment, XmATTACH_FORM,
     	    XmNbottomWidget, button,
-    	    0); 
+    	    NULL); 
     XtVaGetValues(window->textArea,
     		textNemulateTabs, &emTabDist,
     		textNwrapMargin, &wrapMargin, 
     		textNwordDelimiters, &delimiters, 
-    		0);
+    		NULL);
     textW = XtVaCreateManagedWidget("text", textWidgetClass, sw,
     	    textNrows, rows, 
     	    textNcolumns, cols,
@@ -2134,11 +2146,11 @@ static Widget createOutputDialog(WindowInfo *window, char *text,
     	    textNautoWrap, window->editorInfo->wrapMode == NEWLINE_WRAP,
     	    textNcontinuousWrap, window->editorInfo->wrapMode == CONTINUOUS_WRAP,
     	    textNoverstrike, window->editorInfo->overstrike,
-    	    0);
+    	    NULL);
     TextSetString(textW, text);
     }
     
-    XtVaSetValues(XtParent(form), XmNtitle, "Nedit - Output from Command", 0);
+    XtVaSetValues(XtParent(form), XmNtitle, "Nedit - Output from Command", NULL);
     ManageDialogCentered(form);
     return form;
 }

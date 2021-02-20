@@ -29,6 +29,9 @@
 #include <config.h>
 #include <stdio.h>
 #include <stdlib.h>
+#ifdef _WIN32
+# include <windows.h>
+#endif
 #ifdef HAVE_X11_XLOCALE_H
 #include <X11/Xlocale.h>
 #else
@@ -41,7 +44,6 @@
 #endif
 #ifdef _WIN32
 # include <X11/XLIBXTRA.h>
-# include <windows.h>
 #endif
 #ifdef VMS
 #include <rmsdef.h>
@@ -85,15 +87,15 @@ char BadFilenameChars[] = "\n \t*?(){}";
 #else
 # ifdef _WIN32
 #if defined(ENABLE_OPEN_SELECTED_GLOBBING)
-char BadFilenameChars[] = "\n\r\t(){}@";
+char BadFilenameChars[] = "\n\r\t(){}";
 #else
-char BadFilenameChars[] = "\n\r\t*?()[]{}@";
+char BadFilenameChars[] = "\n\r\t*?()[]{}";
 #endif
 #else
 #if defined(ENABLE_OPEN_SELECTED_GLOBBING)
-char BadFilenameChars[] = "\n \t(){}@";
+char BadFilenameChars[] = "\n \t(){}";
 #else
-char BadFilenameChars[] = "\n \t*?()[]{}@";
+char BadFilenameChars[] = "\n \t*?()[]{}";
 #endif
 #endif
 #endif /* VMS */

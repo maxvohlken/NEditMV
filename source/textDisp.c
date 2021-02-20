@@ -177,7 +177,7 @@ textDisp *TextDCreate(Widget widget,
     textD->cursorFGGC = XtGetGC(widget, GCForeground, &gcValues);
     
     /* Add scroll bars to the parent if it is a scrolled window. */
-    XtVaGetValues(XtParent(widget), XmNvisualPolicy, &visualPolicy, 0);
+    XtVaGetValues(XtParent(widget), XmNvisualPolicy, &visualPolicy, NULL);
     if (XtClass(XtParent(widget)) == xmScrolledWindowWidgetClass &&
         visualPolicy == XmVARIABLE)
     {
@@ -187,21 +187,21 @@ textDisp *TextDCreate(Widget widget,
     	    	xmScrollBarWidgetClass, XtParent(widget),
     	    	XmNorientation, XmHORIZONTAL, 
     	    	XmNhighlightThickness, 1,
-    	    	XmNrepeatDelay, 10, 0);
+    	    	XmNrepeatDelay, 10, NULL);
     	textD->vScrollBar = XtVaCreateManagedWidget("textVertScrollBar",
     	    	xmScrollBarWidgetClass, XtParent(widget),
     	    	XmNorientation, XmVERTICAL,
 	   	    	XmNhighlightThickness, 1,
-    	    	XmNrepeatDelay, 10, 0);
+    	    	XmNrepeatDelay, 10, NULL);
 	    /* Set the little square in the corner between the scroll
     	   bars to be the same color as the scroll bar interiors 
     	   and set the scrolled window areas */
-    	XtVaGetValues(textD->vScrollBar, XmNtroughColor, &troughColor, 0);
+    	XtVaGetValues(textD->vScrollBar, XmNtroughColor, &troughColor, NULL);
     	XtVaSetValues(XtParent(widget), 
     			XmNhorizontalScrollBar, textD->hScrollBar,
     			XmNverticalScrollBar, textD->vScrollBar,
     			XmNworkWindow, widget,
-    			0);
+    			NULL);
     }
 
     textD->lineStarts = (int *)XtMalloc(sizeof(int) * textD->nVisibleLines);
@@ -222,7 +222,7 @@ textDisp *TextDCreate(Widget widget,
     /* Initialize the scroll bars and attach movement callbacks */
     if (textD->vScrollBar != NULL) {
 	XtVaSetValues(textD->vScrollBar, XmNminimum, 1, XmNmaximum, 2,
-    		XmNsliderSize, 1, XmNrepeatDelay, 10, XmNvalue, 1, 0);
+    		XmNsliderSize, 1, XmNrepeatDelay, 10, XmNvalue, 1, NULL);
 	XtAddCallback(textD->vScrollBar, XmNdragCallback, vScrollCB, (XtPointer)textD);
 	XtAddCallback(textD->vScrollBar, XmNvalueChangedCallback, vScrollCB, 
 		(XtPointer)textD);
@@ -230,7 +230,7 @@ textDisp *TextDCreate(Widget widget,
     if (textD->hScrollBar != NULL) {
 	XtVaSetValues(textD->hScrollBar, XmNminimum, 0, XmNmaximum, 1,
     		XmNsliderSize, 1, XmNrepeatDelay, 10, XmNvalue, 0,
-    		XmNincrement, fontStruct->max_bounds.width, 0);
+    		XmNincrement, fontStruct->max_bounds.width, NULL);
 	XtAddCallback(textD->hScrollBar, XmNdragCallback, hScrollCB, (XtPointer)textD);
 	XtAddCallback(textD->hScrollBar, XmNvalueChangedCallback, hScrollCB,
 		(XtPointer)textD);
@@ -576,7 +576,7 @@ void TextDSetScroll(textDisp *textD, int topLineNum, int horizOffset)
     	topLineNum = max(textD->topLineNum,
     	    	textD->nBufferLines + 2 - textD->nVisibleLines);
     XtVaGetValues(textD->hScrollBar, XmNmaximum, &sliderMax, 
-    	    XmNsliderSize, &sliderSize, 0);
+    	    XmNsliderSize, &sliderSize, NULL);
     if (horizOffset < 0)
     	horizOffset = 0;
     if (horizOffset > sliderMax - sliderSize)
@@ -2197,7 +2197,7 @@ static void updateVScrollBarRange(textDisp *textD)
     	    XmNmaximum, sliderMax,
     	    XmNsliderSize, sliderSize,
      	    XmNpageIncrement, max(1, textD->nVisibleLines - 1),
-   	    XmNvalue, sliderValue, 0);
+   	    XmNvalue, sliderValue, NULL);
 }
 
 /*
@@ -2236,7 +2236,7 @@ static int updateHScrollBarRange(textDisp *textD)
     	    XmNmaximum, sliderMax,
     	    XmNsliderSize, sliderWidth,
     	    XmNpageIncrement, max(textD->width - 100, 10),
-    	    XmNvalue, textD->horizOffset, 0);
+    	    XmNvalue, textD->horizOffset, NULL);
     
     /* Return True if scroll position was changed */
     return origHOffset != textD->horizOffset;
